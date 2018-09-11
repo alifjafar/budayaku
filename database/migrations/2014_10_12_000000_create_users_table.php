@@ -28,28 +28,30 @@ class CreateUsersTable extends Migration
         });
 
         User::insert([
-            'username' => 'admin',
-            'email'    => 'admin@farnetwork.net',
-            'password' => 'budayaku2018',
-            'role_id'  => 1
-        ],
-        [
-            'username' => 'staff',
-            'email'    => 'staff@farnetwork.net',
-            'password' => 'budayaku2018',
-            'role_id'  => 2
-        ],
-        [
-            'username' => 'alifjafar',
-            'email'    => 'alif@farnetwork.net',
-            'password' => 'budayaku2018',
-            'role_id'  => 3
-        ],
-        [
-            'username' => 'rizky',
-            'email'    => 'rizkyrhakiki21@gmail.com',
-            'password' => 'budayaku2018',
-            'role_id'  => 4
+            [
+                'username' => 'admin',
+                'email'    => 'admin@farnetwork.net',
+                'password' => bcrypt('budayaku2018'),
+                'role_id'  => 1,
+            ],
+            [
+                'username' => 'staff',
+                'email'    => 'staff@farnetwork.net',
+                'password' => bcrypt('budayaku2018'),
+                'role_id'  => 2,
+            ],
+            [
+                'username' => 'alifjafar',
+                'email'    => 'alif@farnetwork.net',
+                'password' => bcrypt('budayaku2018'),
+                'role_id'  => 3,
+            ],
+            [
+                'username' => 'rizky',
+                'email'    => 'rizkyrhakiki21@gmail.com',
+                'password' => bcrypt('budayaku2018'),
+                'role_id'  => 4,
+            ]
         ]);
 
     }

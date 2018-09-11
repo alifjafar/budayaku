@@ -27,34 +27,36 @@ class CreateUserProfileTable extends Migration
         });
 
         UserProfile::insert([
-            'user_id'   => 1,
-            'name'      => 'Super Admin',
-            'gender'    => 1,
-            'telp'      => '08123412312',
-            'address'   => 'Jl. Telekomunikasi No. 1 Bandung Jawa Barat'
-        ],
-        [
-            'user_id'   => 2,
-            'name'      => 'Staff Budayaku',
-            'gender'    => 2,
-            'telp'      => '08123412312',
-            'address'   => 'Jl. Telekomunikasi No. 1 Bandung Jawa Barat'
-        ],
-        [
-            'user_id'   => 3,
-            'name'      => 'Alif Jafar',
-            'gender'    => 1,
-            'telp'      => '08123412312',
-            'address'   => 'Jl. Telekomunikasi No. 1 Bandung Jawa Barat'
-        ],
-        [
-            'user_id'   => 4,
-            'name'      => 'Rizky Rahmat Hakiki',
-            'gender'    => 1,
-            'telp'      => '08123412312',
-            'address'   => 'Jl. Telekomunikasi No. 1 Bandung Jawa Barat'
-        ]
-        );
+            [
+                'user_id'   => 1,
+                'name'      => 'Super Admin',
+                'gender'    => 1,
+                'telp'      => '08123412312',
+                'address'   => 'Jl. Telekomunikasi No. 1 Bandung Jawa Barat',
+            ],
+            [
+                'user_id'   => 2,
+                'name'      => 'Staff Budayaku',
+                'gender'    => 2,
+                'telp'      => '08123412312',
+                'address'   => 'Jl. Telekomunikasi No. 1 Bandung Jawa Barat',
+            ],
+            [
+                'user_id'   => 3,
+                'name'      => 'Alif Jafar',
+                'gender'    => 1,
+                'telp'      => '08123412312',
+                'address'   => 'Jl. Telekomunikasi No. 1 Bandung Jawa Barat',
+            ],
+            [
+                'user_id'   => 4,
+                'name'      => 'Rizky Rahmat Hakiki',
+                'gender'    => 1,
+                'telp'      => '08123412312',
+                'address'   => 'Jl. Telekomunikasi No. 1 Bandung Jawa Barat',
+            ]
+
+        ]);
     }
 
     /**
