@@ -16,7 +16,7 @@
             </div>
         @else
             <div id="addService" class="mt-3">
-                <a href="#" class="btn btn-sm btn-budayaku btn-block">Iklankan Jasa</a>
+                <span class="btn btn-sm btn-budayaku btn-block" onclick="swalMe()">Iklankan Jasa</span>
             </div>
         @endif
         <div id="nav-sidebar" class="mt-3">
@@ -41,3 +41,18 @@
         @endif
     </div>
 </div>
+@push('js')
+    <script>
+        function swalMe() {
+            @if(Auth::user()->provider->status == "Pending")
+            swal({
+                title: "Oops!",
+                text: "Akunmu belum di verifikasi",
+                icon: "error",
+            });
+            @else
+                window.location.href = '{{ route('homepage') }}';
+            @endif
+        }
+    </script>
+@endpush

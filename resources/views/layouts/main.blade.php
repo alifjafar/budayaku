@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @yield('css')
 </head>
-<body @yield('body')>
+<body @stack('body')>
     @include('module.navbar')
     @yield('header')
     @yield('content')
@@ -51,8 +51,9 @@
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
+    <script src="/js/swal.min.js"></script>
     @include('module.modal-login')
 
-    @yield('js')
+    @stack('js')
 </body>
 </html>

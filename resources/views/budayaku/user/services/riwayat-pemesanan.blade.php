@@ -2,8 +2,8 @@
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 @endsection
-@section('body') class="bg-light"
-@endsection
+@push('body') class="bg-light"
+@endpush
 
 @section('content')
 <section class="mt-5" id="edit-profile">
@@ -155,7 +155,7 @@
 </section>
 @endsection
 
-@section('js')
+@push('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
 <script>
@@ -181,4 +181,4 @@ new Vue({
         }
 });
 </script>
-@endsection
+@endpush

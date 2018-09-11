@@ -22,6 +22,10 @@ class CreatePartnersTable extends Migration
             $table->longText('description');
             $table->longText('address');
             $table->string('id_card');
+            $table->enum('status', [
+                'Active',
+                'Pending'
+            ]);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -38,7 +42,8 @@ class CreatePartnersTable extends Migration
                 pengembangan dan penciptaan seni budaya Bali. Sanggar ini terutama menampung dan mengasah bakat seni anak-anak putus 
                 sekolah atau mereka yang sudah tamat sekolah tetapi belum bekerja.',
             'address' => 'Jl. Telekomunikasi No. 1 Bandung Jawa Barat',
-            'id_card' => 'default.png'
+            'id_card' => 'default.png',
+            'status' => 'Active'
 
         ]);
     }

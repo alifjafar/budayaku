@@ -172,7 +172,7 @@
 </section>
 @endsection
 
-@section('js')
+@push('js')
 <script>
 var sync1 = $(".slider");
 var sync2 = $(".navigation-thumbs");
@@ -246,4 +246,4 @@ var thumbs = sync2.owlCarousel({
   $owl_slider.to(number, 100, true);
 });
 </script>
-@endsection
+@endpush

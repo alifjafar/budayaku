@@ -25,7 +25,7 @@ class PartnerRegister extends FormRequest
     {
         return [
             'user_id' => 'required|exists:users,id',
-            'slug' => 'required|unique:partners|unique:partner_registers',
+            'slug' => 'required|unique:partners',
             'name' => 'required|max:20',
             'description' => 'required',
             'address' => 'required',

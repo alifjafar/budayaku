@@ -1,6 +1,6 @@
 @extends('layouts.main')
-@section('body') class="bg-light"
-@endsection
+@push('body') class="bg-light"
+@endpush
 
 @section('content')
 <section class="mt-5" id="edit-profile">
@@ -94,11 +94,11 @@
 </section>
 @endsection
 
-@section('js')
+@push('js')
 <script>
     $(function () {
     $('[data-toggle="popover"]').popover()
   })
 
 </script>
-@endsection
+@endpush

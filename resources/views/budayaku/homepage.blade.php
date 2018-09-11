@@ -181,7 +181,7 @@
 </section>
 @endsection
 
-@section('js')
+@push('js')
 <script type="text/javascript">
     $(document).ready(function(){
     $('.owl-carousel').owlCarousel({
@@ -245,4 +245,4 @@ $('a[href*="#"]')
   });
 
 </script>
-@endsection
+@endpush

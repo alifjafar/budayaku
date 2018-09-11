@@ -10,8 +10,10 @@ class Partner extends Model
         'user_id',
         'name',
         'description',
-        'alamat',
+        'address',
         'slug',
+        'id_card',
+        'status'
     ];
 
     public function user()

@@ -10,6 +10,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('partner/register', 'PartnerRegisterController@create')->name('register-partner');
     Route::post('partner', 'PartnerRegisterController@partnerRegister')->name('partner.register');
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/{username}', 'ProfileController@index')->name('profile');
+        Route::get('/{username}/edit', 'ProfileController@edit')->name('edit-profile');
+        Route::get('/{username}/change_password', 'ProfileController@editPassword')->name('edit-password');
+        Route::put('/edit/{profile}','ProfileController@updateProfile')->name('update.profile');
+        Route::put('/change_password/{user}','ProfileController@updatePassword')->name('update.password');
+    });
 });
 
 
@@ -30,11 +38,6 @@ Route::get('/explore', function () {
     return view('budayaku.daftarkesenian');
 });
 
-Route::group(['prefix' => 'user'], function () {
-    Route::get('/{username}', 'ProfileController@index')->name('profile');
-    Route::get('/{username}/edit', 'ProfileController@edit')->name('edit-profile');
-    Route::get('/{username}/change_password', 'ProfileController@editPassword')->name('edit-password');
-});
 
 Route::get('/payment/invoices', function () {
     return view('budayaku.user.services.riwayat-pemesanan');

@@ -15,8 +15,18 @@
                         <div class="container mb-3 mt-3 ">
                             <div class="row px-2">
                                 <div class="col-md-9">
-                                    <form action="{{ route('partner.register') }}" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('partner.register') }}" method="post"
+                                          enctype="multipart/form-data">
                                         @csrf
+                                        @if (session('success'))
+                                            <div class="form-group">
+                                                <div class="alert alert-success alert-dismissable">
+                                                    <a href="#" class="close" data-dismiss="alert"
+                                                       aria-label="close">×</a>
+                                                    {{ session('success') }}
+                                                </div>
+                                            </div>
+                                        @endif
                                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                         <div class="form-group">
                                             <label for="name" class="col-form-label"><strong>Nama
@@ -41,7 +51,9 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">https//budayaku.online/</span>
                                                 </div>
-                                                <input type="text" class="form-control {{ $errors->has('slug') ? ' is-invalid' : '' }}" name="slug" required>
+                                                <input type="text"
+                                                       class="form-control {{ $errors->has('slug') ? ' is-invalid' : '' }}"
+                                                       name="slug" required>
                                                 @if ($errors->has('slug'))
                                                     <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('slug') }}</strong>
@@ -53,7 +65,8 @@
                                         <div class="form-group">
                                             <label for="description" class="col-form-label"><strong>Deskripsi
                                                     Komunitas</strong></label>
-                                            <textarea name="description" id="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
+                                            <textarea name="description" id="description"
+                                                      class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
                                                       placeholder="Deskripsi Mengenai Komunitasmu"
                                                       rows="3">{{ old('description') }}</textarea>
                                             @if ($errors->has('description'))
@@ -66,7 +79,8 @@
                                         <div class="form-group">
                                             <label for="address" class="col-form-label"><strong>Alamat Lengkap
                                                     Komunitas</strong></label>
-                                            <textarea name="address" id="address" class="form-control {{ $errors->has('address') ? ' is-invalid' : '' }}"
+                                            <textarea name="address" id="address"
+                                                      class="form-control {{ $errors->has('address') ? ' is-invalid' : '' }}"
                                                       placeholder="Alamat Lengkap Komunitas"
                                                       rows="3">{{ old('address') }}</textarea>
                                             @if ($errors->has('address'))
@@ -80,7 +94,9 @@
                                             <label for="address" class="col-form-label"><strong>KTP / Identitas
                                                     Penanggung Jawab</strong></label>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input {{ $errors->has('id_card') ? ' is-invalid' : '' }}" id="id_card"
+                                                <input type="file"
+                                                       class="custom-file-input {{ $errors->has('id_card') ? ' is-invalid' : '' }}"
+                                                       id="id_card"
                                                        name="id_card">
                                                 <label class="custom-file-label" for="id_card">Choose File</label>
                                                 @if ($errors->has('id_card'))
@@ -111,15 +127,15 @@
     </section>
 @endsection
 
-@section('js')
+@push('js')
     <script>
         $(function () {
             $('[data-toggle="slug"]').tooltip()
         });
 
-        $('#id_card').on('change',function(){
-            var fileName = $(this).val();
+        $('#id_card').on('change', function (e) {
+            var fileName = e.target.files[0].name;
             $(this).next('.custom-file-label').html(fileName);
         })
     </script>
-@endsection
+@endpush
