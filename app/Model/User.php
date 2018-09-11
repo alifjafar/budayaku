@@ -37,4 +37,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Mahasiswa::class, 'user_id', 'id');
     }
+
+    public function provider()
+    {
+        return $this->hasOne(Partner::class,'user_id', 'id');
+    }
 }
