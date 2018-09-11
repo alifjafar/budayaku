@@ -116,6 +116,7 @@
         $(function () {
             $('[data-toggle="slug"]').tooltip()
         });
+
         $('#id_card').on('change',function(){
             var fileName = $(this).val();
             $(this).next('.custom-file-label').html(fileName);
