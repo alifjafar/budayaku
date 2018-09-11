@@ -21,10 +21,10 @@ class CreateRolesTable extends Migration
         });
 
         Role::insert([
-            ['name'] => 'superadmin',
-            ['name'] => 'staff',
-            ['name'] => 'provider',
-            ['name'] => 'user'
+            ['name' => 'superadmin'],
+            ['name' => 'staff'],
+            ['name' => 'provider'],
+            ['name' => 'user'],
         ]);
 
     }
