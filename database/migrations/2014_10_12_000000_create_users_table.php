@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -25,6 +26,32 @@ class CreateUsersTable extends Migration
 
             $table->foreign('role_id')->references('id')->on('roles');
         });
+
+        User::insert([
+            'username' => 'admin',
+            'email'    => 'admin@farnetwork.net',
+            'password' => 'budayaku2018',
+            'role_id'  => 1
+        ],
+        [
+            'username' => 'staff',
+            'email'    => 'staff@farnetwork.net',
+            'password' => 'budayaku2018',
+            'role_id'  => 2
+        ],
+        [
+            'username' => 'alifjafar',
+            'email'    => 'alif@farnetwork.net',
+            'password' => 'budayaku2018',
+            'role_id'  => 3
+        ],
+        [
+            'username' => 'rizky',
+            'email'    => 'rizkyrhakiki21@gmail.com',
+            'password' => 'budayaku2018',
+            'role_id'  => 4
+        ]);
+
     }
 
     /**

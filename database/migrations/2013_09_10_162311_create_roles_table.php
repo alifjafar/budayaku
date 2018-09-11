@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\Role;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -18,6 +19,14 @@ class CreateRolesTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        Role::insert([
+            ['name'] => 'superadmin',
+            ['name'] => 'staff',
+            ['name'] => 'provider',
+            ['name'] => 'user'
+        ]);
+
     }
 
     /**
