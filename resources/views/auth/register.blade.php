@@ -1,77 +1,74 @@
-@extends('layouts.app')
-
+@extends('layouts.main')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+    <section>
+        <div class="container ">
+            <div class="row">
+                <div class="col text-center mt-5">
+                    <div class="brand-budayaku brand-md"><a href="{{ route('homepage') }}">Budayaku</a></div>
+                    <br>
+                    <span class="section-heading">Daftar Akun Baru Sekarang!</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 offset-md-4 mt-5 ">
+                    <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                         @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}" placeholder="Nama Lengkap" required autofocus>
+                            @if ($errors->has('name'))
+                                <small class="color-budayaku">{{ $errors->first('name') }}</small>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="E-mail" required autofocus>
+                            @if ($errors->has('email'))
+                                <small class="color-budayaku">{{ $errors->first('email') }}</small>
+                            @endif
                         </div>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <div class="form-group">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" name="gender" value="1" id="gMan" class="custom-control-input" {{ (old('gender') == 2) ? 'checked' : '' }} required>
+                                <label class="custom-control-label" for="gMan">Laki-Laki</label>
                             </div>
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" name="gender" value="2" id="gWoman" class="custom-control-input" {{ (old('gender') == 2) ? 'checked' : '' }} >
+                                <label class="custom-control-label" for="gWoman">Perempuan</label>
+                            </div> @if ($errors->has('gender'))
+                                <small class="color-budayaku">{{ $errors->first('gender') }}</small>
+                            @endif
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                        <div class="form-group">
+                            <input type="text" name="username" class="form-control" placeholder="Username" value="{{ old('username') }}" required autofocus>
+                            <small class="text-dark"><i>Username tidak dapat dirubah</i></small>
+                            @if ($errors->has('username'))
+                                <div id="error-username">
+                                    <small class="color-budayaku">{{ $errors->first('username') }}</small>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required autofocus>
+                            @if ($errors->has('password'))
+                                <small class="color-budayaku">{{ $errors->first('password') }}</small>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="confirmation-password" name="password_confirmation" class="form-control mb-3" placeholder="Confirm Password"
+                                   required>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                        <p>Dengan klik daftar, kamu telah menyetujui <strong><a href="#" class="color-budayaku">Aturan Penggunaan</a></strong>                        dan <strong><a href="#" class="color-budayaku">Kebijakan Privasi</a></strong> dari <span class="font-budayaku color-budayaku">Budayaku</span>.</p>
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
+                        <button type="submit" class="btn btn-daftar mt-3 mb-5">Daftar</button>
                     </form>
+
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 @endsection

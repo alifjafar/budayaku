@@ -19,8 +19,8 @@ class CreateUserProfileTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('name');
             $table->tinyInteger('gender')->comment('1. Laki-Laki, 2. Perempuan');
-            $table->string('telp');
-            $table->longText('address');
+            $table->string('telp')->nullable();
+            $table->longText('address')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -33,6 +33,7 @@ class CreateUserProfileTable extends Migration
                 'gender'    => 1,
                 'telp'      => '08123412312',
                 'address'   => 'Jl. Telekomunikasi No. 1 Bandung Jawa Barat',
+                'created_at' => \Carbon\Carbon::now()
             ],
             [
                 'user_id'   => 2,
@@ -40,6 +41,7 @@ class CreateUserProfileTable extends Migration
                 'gender'    => 2,
                 'telp'      => '08123412312',
                 'address'   => 'Jl. Telekomunikasi No. 1 Bandung Jawa Barat',
+                'created_at' => \Carbon\Carbon::now()
             ],
             [
                 'user_id'   => 3,
@@ -47,6 +49,7 @@ class CreateUserProfileTable extends Migration
                 'gender'    => 1,
                 'telp'      => '08123412312',
                 'address'   => 'Jl. Telekomunikasi No. 1 Bandung Jawa Barat',
+                'created_at' => \Carbon\Carbon::now()
             ],
             [
                 'user_id'   => 4,
@@ -54,6 +57,7 @@ class CreateUserProfileTable extends Migration
                 'gender'    => 1,
                 'telp'      => '08123412312',
                 'address'   => 'Jl. Telekomunikasi No. 1 Bandung Jawa Barat',
+                'created_at' => \Carbon\Carbon::now()
             ]
 
         ]);

@@ -33,24 +33,28 @@ class CreateUsersTable extends Migration
                 'email'    => 'admin@farnetwork.net',
                 'password' => bcrypt('budayaku2018'),
                 'role_id'  => 1,
+                'created_at' => \Carbon\Carbon::now()
             ],
             [
                 'username' => 'staff',
                 'email'    => 'staff@farnetwork.net',
                 'password' => bcrypt('budayaku2018'),
                 'role_id'  => 2,
+                'created_at' => \Carbon\Carbon::now()
             ],
             [
                 'username' => 'alifjafar',
                 'email'    => 'alif@farnetwork.net',
                 'password' => bcrypt('budayaku2018'),
                 'role_id'  => 3,
+                'created_at' => \Carbon\Carbon::now()
             ],
             [
                 'username' => 'rizky',
                 'email'    => 'rizkyrhakiki21@gmail.com',
                 'password' => bcrypt('budayaku2018'),
-                'role_id'  => 4,
+                'role_id'  => 3,
+                'created_at' => \Carbon\Carbon::now()
             ]
         ]);
 

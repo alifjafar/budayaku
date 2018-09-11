@@ -35,11 +35,22 @@ class User extends Authenticatable
 
     public function profile()
     {
-        return $this->hasOne(Mahasiswa::class, 'user_id', 'id');
+        return $this->hasOne(UserProfile::class, 'user_id', 'id');
     }
 
     public function provider()
     {
         return $this->hasOne(Partner::class,'user_id', 'id');
+    }
+
+    public function getAvatarAttribute()
+    {
+        $hash = md5(strtolower(trim($this->email))) . '.jpeg' . '?s=106&d=mm&r=g';
+        return "https://secure.gravatar.com/avatar/$hash";
+    }
+
+    public function isPartner()
+    {
+        return $this->provider()->exists();
     }
 }
