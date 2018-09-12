@@ -44,14 +44,16 @@
 @push('js')
     <script>
         function swalMe() {
-            @if(Auth::user()->provider->status == "Pending")
-            swal({
-                title: "Oops!",
-                text: "Akunmu belum di verifikasi",
-                icon: "error",
-            });
-            @else
-                window.location.href = '{{ route('homepage') }}';
+            @if(Auth::user()->isPartner())
+                @if(Auth::user()->provider->status == "Pending")
+                swal({
+                    title: "Oops!",
+                    text: "Permintaan untuk bermitra belum di approve",
+                    icon: "error",
+                });
+                @else
+                    window.location.href = '{{ route('homepage') }  }';
+                @endif
             @endif
         }
     </script>

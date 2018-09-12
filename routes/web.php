@@ -4,10 +4,10 @@ Route::get('/', function () {
     return view('budayaku.homepage');
 })->name('homepage');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('partner/register', 'PartnerRegisterController@create')->name('register-partner');
     Route::post('partner', 'PartnerRegisterController@partnerRegister')->name('partner.register');
 

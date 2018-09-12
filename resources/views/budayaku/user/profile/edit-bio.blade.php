@@ -18,7 +18,7 @@
                                      class="img-fluid rounded mx-auto d-block">
                                 <span class="pt-2 d-block text-center"><button type="button"
                                                                                class="btn btn-sm btn-danger"
-                                                                               data-toggle="popover"
+                                                                               data-toggle="change_avatar"
                                                                                title="Bagaimana Cara Ganti Avatar?"
                                                                                data-placement="bottom" data-content="Kamu dapat mengganti avatar
                                 di Gravatar.com Silahkan Sign up dengan email : {{ $user->email }}">Ganti Avatar</button></span>
@@ -45,7 +45,7 @@
                                             <input id="name" type="text"
                                                    class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
                                                    name="name" value="{{ $user->profile->name }}">
-                                            @if ($errors->has('email'))
+                                            @if ($errors->has('name'))
                                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
@@ -70,15 +70,15 @@
                                         <label for="email" class="col-md-3 col-form-label">Email</label>
 
                                         <div class="col-md-9">
-                                            <input id="email" type="text"
-                                                   class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                                   name="email" value="{{ $user->email }}"
-                                                   disabled>
-                                            @if ($errors->has('email'))
-                                                <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                            @endif
+                                            <label for="">{{ $user->email }}
+                                                @if($user->email_verified_at != null)
+                                                <span class="verified"><i
+                                                        class="fa fa-check"></i>  Verified</span>
+                                                @endif
+                                            </label>
+                                            <a href="#" class="color-budayaku float-right">
+                                                <small>Change Email</small>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -112,8 +112,7 @@
                                         <div class="col-md-9">
                                             <input id="telp" type="text"
                                                    class="form-control{{ $errors->has('notelp') ? ' is-invalid' : '' }}"
-                                                   name="telp" value="{{ $user->profile->telp }}"
-                                            >
+                                                   name="telp" value="{{ $user->profile->telp }}">
                                             @if ($errors->has('notelp'))
                                                 <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('notelp') }}</strong>
@@ -137,7 +136,8 @@
                                     </div>
                                     <div class="form-group row justify-content-center">
                                         <div class="col-md-4">
-                                            <button id="submit-data" type="submit" class="btn btn-sm btn-budayaku btn-block" disabled=""><i
+                                            <button id="submit-data" type="submit"
+                                                    class="btn btn-sm btn-budayaku btn-block" disabled=""><i
                                                     class="fa fa-save"></i> Simpan
                                             </button>
                                         </div>
@@ -156,12 +156,12 @@
 @push('js')
     <script>
         $(function () {
-            $('[data-toggle="popover"]').popover()
+            $('[data-toggle="change_avatar"]').popover()
         });
 
         @if(Session::has('success'))
-            swal("Good Job !", "Profil Berhasil di Update", "success");
-        @endif
+        swal("Good Job !", "Profil Berhasil di Update", "success");
+            @endif
 
         let button = $('#submit-data');
         let orig = [];
@@ -186,8 +186,8 @@
 
             let disable = true;
             $("form :input").each(function () {
-                var type = $(this).getType();
-                var id = $(this).attr('id');
+                let type = $(this).getType();
+                let id = $(this).attr('id');
 
                 if (type == 'text' || type == 'select') {
                     disable = (orig[id].value == $(this).val());
@@ -202,5 +202,6 @@
 
             button.prop('disabled', disable);
         });
+
     </script>
 @endpush

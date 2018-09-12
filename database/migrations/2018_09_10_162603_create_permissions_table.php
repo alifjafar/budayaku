@@ -16,10 +16,29 @@ class CreatePermissionsTable extends Migration
         Schema::create('permissions', function (Blueprint $table) {
             $table->unsignedInteger('role_id');
             $table->string('action');
-            $table->timestamps();
 
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->primary(['role_id', 'action']);
+            $table->foreign('role_id')->references('id')->on('roles');
         });
+
+        \App\Model\Permission::insert([
+            [
+                'role_id' => 1,
+                'action'  => 'admin'
+            ],
+            [
+                'role_id' => 1,
+                'action'  => 'manage'
+            ],
+            [
+                'role_id' => 2,
+                'action'  => 'manage'
+            ],
+            [
+                'role_id' => 3,
+                'action'  => 'manage_mitra'
+            ]
+        ]);
     }
 
     /**

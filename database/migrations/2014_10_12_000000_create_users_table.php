@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             [
                 'username' => 'admin',
                 'email'    => 'admin@farnetwork.net',
+                'email_verified_at' => \Carbon\Carbon::now(),
                 'password' => bcrypt('budayaku2018'),
                 'role_id'  => 1,
                 'created_at' => \Carbon\Carbon::now()
@@ -38,6 +39,7 @@ class CreateUsersTable extends Migration
             [
                 'username' => 'staff',
                 'email'    => 'staff@farnetwork.net',
+                'email_verified_at' => \Carbon\Carbon::now(),
                 'password' => bcrypt('budayaku2018'),
                 'role_id'  => 2,
                 'created_at' => \Carbon\Carbon::now()
@@ -45,6 +47,7 @@ class CreateUsersTable extends Migration
             [
                 'username' => 'alifjafar',
                 'email'    => 'alif@farnetwork.net',
+                'email_verified_at' => \Carbon\Carbon::now(),
                 'password' => bcrypt('budayaku2018'),
                 'role_id'  => 3,
                 'created_at' => \Carbon\Carbon::now()
@@ -52,6 +55,7 @@ class CreateUsersTable extends Migration
             [
                 'username' => 'rizky',
                 'email'    => 'rizkyrhakiki21@gmail.com',
+                'email_verified_at' => \Carbon\Carbon::now(),
                 'password' => bcrypt('budayaku2018'),
                 'role_id'  => 3,
                 'created_at' => \Carbon\Carbon::now()

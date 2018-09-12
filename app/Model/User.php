@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -52,5 +52,15 @@ class User extends Authenticatable
     public function isPartner()
     {
         return $this->provider()->exists();
+    }
+
+    public function hasAccess()
+    {
+        return ($this['role_id'] == 1 || $this['role_id'] == 2);
+    }
+
+    public function permissions()
+    {
+        return $this->hasManyThrough(Permission::class, Role::class, 'id', 'role_id', 'role_id');
     }
 }

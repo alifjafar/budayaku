@@ -128,7 +128,7 @@
                     <li class="profile-img">
                         <img src="{{ Auth::user()->avatar }}" class="profile-img">
                         <div class="profile-body">
-                            <h5>{{ Auth::user()->name }}</h5>
+                            <h5>{{ Auth::user()->profile->name }}</h5>
                             <h6>{{ Auth::user()->username }}</h6>
                         </div>
                       </li>
