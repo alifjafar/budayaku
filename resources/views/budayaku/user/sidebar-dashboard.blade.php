@@ -52,7 +52,7 @@
                     icon: "error",
                 });
                 @else
-                    window.location.href = '{{ route('homepage') }  }';
+                    window.location.href = '{{ route('product.create') }}';
                 @endif
             @endif
         }

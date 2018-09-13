@@ -18,6 +18,11 @@ Route::group(['middleware' => ['auth','verified']], function () {
         Route::put('/edit/{profile}','ProfileController@updateProfile')->name('update.profile');
         Route::put('/change_password/{user}','ProfileController@updatePassword')->name('update.password');
     });
+
+    Route::resource('product', 'ProductController');
+    Route::resource('categories', 'CategoryController');
+    Route::post('upload-image','ProductController@uploadImage')->name('upload.image');
+    Route::delete('delete-image/{id}', 'ProductController@deleteImage')->name('delete.image');
 });
 
 

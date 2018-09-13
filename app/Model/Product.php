@@ -12,7 +12,8 @@ class Product extends Model
         'description',
         'category_id',
         'price',
-        'provider_id'
+        'video',
+        'partner_id'
     ];
 
     public function category()
@@ -23,5 +24,10 @@ class Product extends Model
     public function provider()
     {
         return $this->belongsTo(Parner::class, 'provider_id', 'id');
+    }
+
+    public function productimage()
+    {
+        return $this->belongsToMany(ImageProduct::class,'product_image','product_id','image_id');
     }
 }
