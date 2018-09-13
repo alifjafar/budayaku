@@ -121,6 +121,11 @@
             $('[data-toggle="image-kesenian"]').tooltip()
         });
 
+        @if(Session::has('success'))
+        swal("Berhasil !", "Product kesenian telah berhasil di publish", "success");
+        @endif
+
+
         $(document).ready(function () {
             $.ajax({
                 async: false,
@@ -128,7 +133,6 @@
                 url: '{{ route('categories.index') }}',
                 success: function (data) {
                     $.each(data.data, function (index, value) {
-                        console.log(value);
                         $('#category').append(
                             '<option value="' + value['id'] + '">' + value['name'] + '</option>'
                         )
@@ -153,20 +157,19 @@
 
         drop.on("success", function (file, res) {
             file.id = res.id;
-            $("#thisproduct").append($('<input type="hidden" ' + 'name="product_images[]" ' + 'value="' + res.id + '">'))
+            $("#thisproduct").append($('<input type="hidden" ' + 'name="product_images[]" ' + 'value="' + res.id + '" id="image'+ res.id +'">'))
         });
 
 
         drop.on('removedfile', function(file) {
             axios.delete('/delete-image/' + file.id)
                 .then(function(response) {
-                    console.log(response)
+                    console.log(response.status);
+                    $('#image' + file.id).remove();
                 })
                 .catch(function(error) {
             });
         });
-
-
 
     </script>
 @endpush

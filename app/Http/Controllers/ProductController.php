@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\ImageProduct;
 use App\Model\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +40,8 @@ class ProductController extends Controller
 
         $product->productimage()->sync($request['product_images']);
 
-        return "berhasil";
+        Session::flash('success', 'Berhasil');
+        return redirect()->back();
     }
 
     public function uploadImage(Request $request)
