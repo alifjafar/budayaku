@@ -23,11 +23,28 @@ class Product extends Model
 
     public function provider()
     {
-        return $this->belongsTo(Parner::class, 'provider_id', 'id');
+        return $this->belongsTo(Partner::class, 'partner_id', 'id');
     }
 
     public function productimage()
     {
         return $this->belongsToMany(ImageProduct::class,'product_image','product_id','image_id');
+    }
+
+    public function getImageAttribute()
+    {
+        return ($this->productimage[0]->path . '/' . $this->productimage[0]->filename);
+    }
+
+    public function getHargaAttribute()
+    {
+        return ('Rp' . number_format($this->price,2,',','.'));
+    }
+
+    public function getVideoIdAttribute()
+    {
+        $url = $this->video;
+        parse_str(parse_url($url, PHP_URL_QUERY), $myvideo);
+        return $myvideo['v'];
     }
 }

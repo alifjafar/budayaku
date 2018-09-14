@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -23,6 +15,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('budayaku.homepage', [
+            'products' => Product::with(['productimage', 'category', 'provider'])->get(),
+        ]);
+    }
+
+    public function getSingle($slug)
+    {
+        $product = Product::where('slug', $slug)->with(['productimage', 'category', 'provider'])->first();
+
+        if($product){
+            return view('budayaku.detailproduct', compact('product'));
+        }
+        return abort('404');
     }
 }

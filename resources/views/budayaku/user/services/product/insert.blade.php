@@ -31,7 +31,7 @@
                     <small>
                         <ol class="breadcrumb" style="background:transparent">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="/payment/invoices">Partner</a></li>
+                            <li class="breadcrumb-item"><a href="#">Partner</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Tambah Jasa</li>
                         </ol>
                     </small>
@@ -115,7 +115,7 @@
     </section>
 @endsection
 @push('js')
-    <script>
+    <script type="text/javascript">
         $(function () {
             $('[data-toggle="video"]').tooltip();
             $('[data-toggle="image-kesenian"]').tooltip()

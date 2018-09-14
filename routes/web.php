@@ -1,12 +1,10 @@
 <?php
 
-Route::get('/', function () {
-    return view('budayaku.homepage');
-})->name('homepage');
+
+Route::get('/', 'HomeController@index')->name('homepage');
+Route::get('/detail/{slug}', 'HomeController@getSingle')->name('detail-product');
 
 Auth::routes(['verify' => true]);
-
-Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('partner/register', 'PartnerRegisterController@create')->name('register-partner');
     Route::post('partner', 'PartnerRegisterController@partnerRegister')->name('partner.register');
@@ -24,11 +22,6 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::post('upload-image','ProductController@uploadImage')->name('upload.image');
     Route::delete('delete-image/{id}', 'ProductController@deleteImage')->name('delete.image');
 });
-
-
-Route::get('/detail/{slug}', function () {
-    return view('budayaku.detailproduct');
-})->name('detail-product');
 
 Route::get('/pembayaran', function () {
     return view('budayaku.formpembayaran');
