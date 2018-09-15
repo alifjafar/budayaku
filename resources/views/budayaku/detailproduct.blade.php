@@ -63,23 +63,27 @@
                         <h6><strong>{{ $product->harga }}</strong></h6>
                         <br>
                         <p>Tanggal Acara :</p>
-                        <form action="">
+                        <form action="{{ route('init.order') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
                             <div class="form-group row">
                                 <label for="inputTglMulai" class="col-sm-2 col-form-label">Mulai</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-input-tanggal" id="inputMulai" name="start_date">
+                                    <input type="date" class="form-input-tanggal" id="inputMulai" name="start_date"
+                                           value="{{ old('start_date', date('Y-m-d')) }}">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputTglMulai" class="col-sm-2 col-form-label">Berakhir</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-input-tanggal" id="inputBerakhir" name="end_date">
+                                    <input type="date" class="form-input-tanggal" id="inputBerakhir" name="end_date"
+                                           value="{{ old('end_date', date('Y-m-d')) }}">
                                 </div>
                             </div>
                             @if(Auth::check())
                                 <button type="submit" class="btn btn-book">Book</button>
                             @else
-                                <a href="/login" class="btn btn-book">Book</a>
+                                <a href="#" onclick="loginMe()" class="btn btn-book">Book</a>
                             @endif
                             {{-- <button type="button" class="btn btn-chat">Chat</button> --}}
 
@@ -188,6 +192,19 @@
 @endsection
 
 @push('js')
+    <script>
+        function loginMe() {
+            $('#login').modal('show');
+        };
+
+        @if(Session::has('exist'))
+        swal({
+            title: "Oops!",
+            text: "Tanggal tersebut sudah di booking",
+            icon: "error",
+        });
+        @endif
+    </script>
     <script>
         var sync1 = $(".slider");
         var sync2 = $(".navigation-thumbs");

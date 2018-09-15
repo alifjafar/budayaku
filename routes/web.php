@@ -9,6 +9,8 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('partner/register', 'PartnerRegisterController@create')->name('register-partner');
     Route::post('partner', 'PartnerRegisterController@partnerRegister')->name('partner.register');
 
+    Route::post('checkorder', 'OrderController@onProcess')->name('init.order');
+
     Route::group(['prefix' => 'user'], function () {
         Route::get('/{username}', 'ProfileController@index')->name('profile');
         Route::get('/{username}/edit', 'ProfileController@edit')->name('edit-profile');
