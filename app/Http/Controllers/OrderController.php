@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Model\Order;
 use App\Model\OrderDetail;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -90,21 +92,36 @@ class OrderController extends Controller
 //        $validator =  $this->validate($request, [
 //           'provider_id' => 'required'
 //        ]);
-
-        $checkOrder = OrderDetail::where('product_id', $request->product_id)->first();
-
-
-        if ($checkOrder) {
-            if ($checkOrder->start_date >= $request->start_date && $checkOrder->end_date <= $request->end_date) {
-
-                $orderProcess = $request->all();
-                return view('budayaku.formpembayaran');
-            }
-            else {
-                Session::flash('exist', 'Gagal');
-                return redirect()->back();
-            }
-        }
+//
+//        $checkOrder = OrderDetail::where('product_id', $request->product_id)->first();
+//
+//        $curPeriod = CarbonPeriod::create($checkOrder->start_date, $checkOrder->end_date);
+//        $reqPeriod = CarbonPeriod::create($request->start_date, $request->end_date);
+//
+//        $curDates = $curPeriod->toArray();
+//        $reqDates = $reqPeriod->toArray();
+//        $exist = 0;
+//        if ($checkOrder) {
+//
+//            foreach ($curDates as $cd)
+//            {
+//                foreach ($reqDates as $rd){
+//                    $cd['date'] == $rd['date'];
+//                    $exist++;
+//                }
+//            }
+//
+//            return $exist;
+//            if ($checkOrder->start_date <= $request->start_date && $checkOrder->end_date <= $request->end_date) {
+//
+//                $orderProcess = $request->all();
+//                return view('budayaku.formpembayaran');
+//            }
+//            else {
+//                Session::flash('exist', 'Gagal');
+//                return redirect()->back();
+//            }
+//        }
 
         return view('budayaku.formpembayaran');
     }
