@@ -643,6 +643,22 @@ a:hover {
     font-weight: 600;
 }
 
+/* Admin Setting */
+
+.backoffice {
+    padding: 1em;
+}
+
+.backoffice .content {
+    margin: 2em 0;
+}
+
+.backoffice .title {
+    font-weight: 600;
+}
+
+/* End */
+
 .uprof {
     color: #fff;
     font-size: 30px;

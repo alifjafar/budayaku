@@ -68,6 +68,16 @@
                             </div>
                         </div>
                     @endforeach
+                @else
+                    <div class="col-md-12">
+                        <div class="card no-border text-center">
+                            <div class="card-body">
+                                <h3>
+                                    <span class="fa fa-warning"></span>
+                                    Tidak ada produk tersedia</h3>
+                            </div>
+                        </div>
+                    </div>
                 @endif
             </div>
         </div>

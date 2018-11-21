@@ -40,7 +40,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function provider()
     {
-        return $this->hasOne(Partner::class,'user_id', 'id');
+        return $this->hasOne(Partner::class, 'user_id', 'id');
     }
 
     public function getAvatarAttribute()
@@ -62,5 +62,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function permissions()
     {
         return $this->hasManyThrough(Permission::class, Role::class, 'id', 'role_id', 'role_id');
+    }
+
+    public function getVerifiedAttribute()
+    {
+        return $this['email_verified_at'] != '' ? 'Yes' : 'No';
     }
 }

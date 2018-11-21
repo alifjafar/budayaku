@@ -37,7 +37,8 @@ class ProfileController extends Controller
 
     public function updateProfile(UpdateProfile $request, UserProfile $profile)
     {
-        $profile->update($request->all());
+        $validated = $request->validated();
+        $profile->update($validated);
 
         Session::flash('success', 'Sukses');
         return redirect()->back();

@@ -110,7 +110,7 @@
                                         <div class="form-group">
                                             <a href="#" class="btn btn-outline-danger btn-sm"><i
                                                     class="fa fa-close"></i> Cancel</a>
-                                            <button type="submit" class="btn btn-budayaku btn-sm"><i
+                                            <button type="submit" class="btn btn-budayaku btn-sm float-right"><i
                                                     class="fa fa-save"></i> Daftar
                                             </button>
                                         </div>

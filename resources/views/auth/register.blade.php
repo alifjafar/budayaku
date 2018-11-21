@@ -30,7 +30,7 @@
                         <div class="form-group">
 
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" name="gender" value="1" id="gMan" class="custom-control-input" {{ (old('gender') == 2) ? 'checked' : '' }} required>
+                                <input type="radio" name="gender" value="1" id="gMan" class="custom-control-input" {{ (old('gender') == 1) ? 'checked' : '' }} required>
                                 <label class="custom-control-label" for="gMan">Laki-Laki</label>
                             </div>
 

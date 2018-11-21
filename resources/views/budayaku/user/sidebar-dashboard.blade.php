@@ -41,6 +41,19 @@
         @endif
     </div>
 </div>
+
+@can('admin')
+    <div class="card border-light sidebar-dashboard mb-3" id="sidebar-dashboard-admin">
+        <div class="card-body">
+            <div id="adminpanel" >
+                <small class="text-muted">Admin Budayaku</small>
+            </div>
+            <div id="admin-panel" class="mt-3">
+                <a href="{{ route('users.index') }}" class="btn btn-sm btn-budayaku btn-block">Konsole Admin</a>
+            </div>
+        </div>
+    </div>
+    @endcan
 @push('js')
     <script>
         function swalMe() {
