@@ -13,4 +13,10 @@ class ImageProduct extends Model
         'path',
         'size',
     ];
+
+    public function productimage()
+    {
+        return $this->belongsToMany(Product::class,'product_image','image_id','product_id');
+    }
+
 }

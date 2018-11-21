@@ -9,7 +9,7 @@
                     <i class="icon icon-dashboard2 s-18"></i>Dashboard
                 </a>
             </li>
-            <li><a href="{{ route('partners.index') }}"><i class="icon icon-party_modeg s-18"></i>Partner</a></li>
+            <li><a href="{{ route('partners.index') }}"><i class="icon icon-assignment s-18"></i>Partner</a></li>
             <li><a href="{{ route('users.index') }}"><i class="icon icon-account_circle s-18"></i>Akun
                     Pengguna</a></li>
             <li class="header">

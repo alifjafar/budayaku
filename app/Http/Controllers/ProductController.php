@@ -19,7 +19,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+
+        $products = Product::self()->get();
+
+        return view('budayaku.user.services.product.index', compact('products'));
     }
 
     /**
@@ -120,6 +123,16 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $images = $product->productimage()->get();
+        foreach ($images as $img)
+        {
+            Storage::disk('public')->delete($img->filename);
+        }
+
+        $product->delete();
+
+        Session::flash('success', 'Berhasil Menghapus Product');
+
+        return route('product.index');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Product extends Model
 {
@@ -46,5 +47,10 @@ class Product extends Model
         $url = $this->video;
         parse_str(parse_url($url, PHP_URL_QUERY), $myvideo);
         return $myvideo['v'];
+    }
+
+    public function scopeSelf($q)
+    {
+        return $q->where('partner_id', Auth::user()->provider->id);
     }
 }

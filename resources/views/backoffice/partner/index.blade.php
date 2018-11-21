@@ -36,7 +36,7 @@
                                         <td>{{ $item->name }}</td>
                                         <td>
                                             @if ( strlen( $item->description ) > 60 ) {{ substr( $item->description, 0, 60 ) }}
-                                            ... @else {{ $post->post_content
+                                            ... @else {{ $item->description
                                         }} @endif</td>
                                         <td>{{ $item->user->profile->name }}</td>
                                         <td><span class="badge {{ $color }}">{{ ucwords($item->status) }}</span>
