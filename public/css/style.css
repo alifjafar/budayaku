@@ -120,6 +120,69 @@ a:hover {
     pointer-events: none;
     color: #aaa;
 }
+.align-text-rigth {
+    text-align: right;
+}
+.align-text-left {
+    text-align: left;
+}
+
+.show-hide-dropdown {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    color: #212529;
+    text-decoration: none;
+    background-color: #e2e6ea;
+    border-color: #f8f9fa;
+    cursor: pointer;
+}
+.show-hide-dropdown a{
+    color: #212529;
+}
+.show-hide-dropdown a:hover{
+    color: #212529;
+    text-decoration: none;
+
+}
+.show-hide-dropdown:hover {
+    color: #212529;
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+
+}
+
+.show-hide-dropdown:focus, .show-hide-dropdown.focus {
+    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5);
+    text-decoration: none;
+
+}
+
+.show-hide-dropdown.disabled, .show-hide-dropdown:disabled {
+    color: #212529;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.show-hide-dropdown:not(:disabled):not(.disabled):active, .show-hide-dropdown:not(:disabled):not(.disabled).active,
+.show > .show-hide-dropdown.dropdown-toggle {
+    color: #212529;
+    background-color: #dae0e5;
+    border-color: #d3d9df;
+}
+
+.show-hide-dropdown:not(:disabled):not(.disabled):active:focus, .show-hide-dropdown:not(:disabled):not(.disabled).active:focus,
+.show > .show-hide-dropdown.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5);
+}
+.list-detail-harga {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    color: #212529;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+    cursor: pointer;
+}
 
 .no-border {
     border: none;

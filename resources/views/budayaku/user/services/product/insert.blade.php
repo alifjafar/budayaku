@@ -70,7 +70,7 @@
                                                   placeholder="Deskripsi Kesenian"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="price">Biaya</label>
+                                        <label for="price">Biaya Total</label>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="input-group mb-3">
@@ -79,12 +79,30 @@
                                                     </div>
                                                     <input type="number" name="price" id="price" class="form-control">
                                                 </div>
-
                                             </div>
                                             <div class="col-md-6">
-                                                <label class="col-form-label text-muted">Biaya dalam 1 hari</label>
+                                                <label class="col-form-label text-muted">/ 1 hari</label>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">Detail Biaya</label>
+                                        <div class="row" id="field">
+                                            <div class="col-md-6">
+                                                <input id="input1" type="text" class="form-control" placeholder="Detail Biaya, Ex: Makeup">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Rp.</span>
+                                                    </div>
+                                                    <input type="number" name="price" class="form-control">  <button id="b1" class="btn add-more" type="button">+</button>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
                                     </div>
                                     <div class="form-group">
                                         <label for="video">Video <a href="#" data-toggle="video"

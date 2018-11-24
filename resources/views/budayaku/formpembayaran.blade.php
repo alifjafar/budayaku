@@ -86,11 +86,27 @@
                                         <div class="form-group row mt-3">
                                             <div class="col-sm-7">
                                                 <p>Harga</p>
+                                                <br>
+                                                <div class="collapse"  id="collapseExample">
+
+                                                    <p class="mt-2 "><strong>Make UP</strong></p>
+                                                    <p class="mt-2 "><strong>Kostum</strong></p>
+                                                    <p class="mt-2 "><strong>Properti</strong></p>
+                                                </div>
                                             </div>
+
                                             <div class="col-sm-5">
-                                                <p>Rp.2000.000</p>
+                                                <p>Rp.10000000</p>
+                                                <a class="align-text-rigth dropdown-toggle" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Detail </a>
+                                                <div class="collapse"  id="collapseExample">
+
+                                                    <p class="mt-2">Rp. 1000.000</p>
+                                                    <p class="mt-2">Rp. 1000.000</p>
+                                                    <p class="mt-2">Rp. 1000.000</p>
+                                                </div>
                                              </div>
-                                        </div>
+
+                                            </div>
                                         <div class="form-group row">
                                             <div class="col-sm-7">
                                                 <p>Biaya Transportasi</p>

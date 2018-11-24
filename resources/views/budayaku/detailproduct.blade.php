@@ -59,8 +59,28 @@
                         </div>
                         <!-- sampe sini -->
                         <hr>
-                        <h6><strong>{{ $product->name }}</strong></h6>
-                        <h6><strong>{{ $product->harga }}</strong></h6>
+                        <div class="align-text-left show-hide-dropdown">
+                            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <h6><strong>{{ $product->name }}</strong></h6>
+                                <h6><strong>{{ $product->harga }}</strong></h6>
+                            </a>
+
+                        <div class="row align-text-left collapse"  id="collapseExample">
+                            <div class="col-sm-7">
+                                <p class="mt-2 "><strong>Make UP</strong></p>
+                                <p class="mt-2 "><strong>Kostum</strong></p>
+                                <p class="mt-2 "><strong>Properti</strong></p>
+                            </div>
+                            <div class="col-sm-5">
+
+                                <p class="mt-2">Rp. 1000.000</p>
+                                <p class="mt-2">Rp. 1000.000</p>
+                                <p class="mt-2">Rp. 1000.000</p>
+                            </div>
+
+                        </div>
+
+                        </div>
                         <br>
                         <p>Tanggal Acara :</p>
                         <form action="{{ route('init.order') }}" method="post" enctype="multipart/form-data">
