@@ -24,7 +24,7 @@
         @endif
         <div id="nav-sidebar" class="mt-3">
             <nav class="nav flex-column">
-                <a class="nav-link" href="{{ route('edit-profile', Auth::user()->username) }}">Profil Saya</a>
+                <a class="nav-link" href="{{ route('dashboard.client') }}">Profil Saya</a>
                 @cannot('admin')
                     <a class="nav-link" href="{{ route('product.index')}}">Produk Saya</a>
                     <a class="nav-link" href="{{ route('booking-list')}}">Transaksi</a>
