@@ -26,7 +26,6 @@
             <nav class="nav flex-column">
                 <a class="nav-link" href="{{ route('dashboard.client') }}">Profil Saya</a>
                 @cannot('admin')
-                    <a class="nav-link" href="{{ route('product.index')}}">Produk Saya</a>
                     <a class="nav-link" href="{{ route('booking-list')}}">Transaksi</a>
                 @endcannot
                 <a href="#" class="nav-link">Notifikasi</a>
@@ -40,7 +39,7 @@
             <div id="nav-sidebar">
                 <nav class="nav flex-column">
                     <a class="nav-link" href="{{ route('edit-profile', Auth::user()->username) }}">Dasbor</a>
-                    <a class="nav-link" href="{{ route('booking-list')}}">Jasa Saya</a>
+                    <a class="nav-link" href="{{ route('product.index')}}">Jasa Saya</a>
                     <a href="#" class="nav-link">Pemesanan Layanan</a>
                 </nav>
             </div>
