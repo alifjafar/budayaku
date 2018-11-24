@@ -24,7 +24,7 @@ class PartnerRegisterController extends Controller
     public function partnerRegister(register $request)
     {
         $validated = $request->validated();
-        $fileName = $validated['name'] . '-' . uniqid() . '.' . $validated['id_card']->getClientOriginalExtension();
+        $fileName = $validated['name'] . '-' . uniqid() . '.' . str_slug($validated['id_card']->getClientOriginalExtension());
         $validated['status'] = "Pending";
 
         Storage::disk('public')->putFileAs('idcard', $validated['id_card'], $fileName, 'public');

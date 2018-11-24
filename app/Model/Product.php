@@ -32,6 +32,16 @@ class Product extends Model
         return $this->belongsToMany(ImageProduct::class,'product_image','product_id','image_id');
     }
 
+    public function booking()
+    {
+        return $this->hasMany(Booking::class,'product_id','id');
+    }
+
+    public function rating()
+    {
+        return $this->hasMany(Rating::class,'product_id','id');
+    }
+
     public function getImageAttribute()
     {
         return ($this->productimage[0]->path . '/' . $this->productimage[0]->filename);

@@ -68,4 +68,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this['email_verified_at'] != '' ? 'Yes' : 'No';
     }
+
+    public function payment()
+    {
+        return $this->hasMany(Payment::class,'user_id','id');
+    }
+
+    public function rating()
+    {
+        return $this->hasMany(Rating::class,'user_id','id');
+    }
 }
