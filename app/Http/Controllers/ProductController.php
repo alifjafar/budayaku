@@ -55,7 +55,7 @@ class ProductController extends Controller
         $path = 'uploads/product/';
         $size = $uploadedFile->getSize();
 
-        Storage::disk('public')->putFileAs($path,$uploadedFile,  $fileName);
+        Storage::disk('public')->putFileAs($path, $uploadedFile, $fileName);
 
         $upload = new ImageProduct;
         $upload->fill([
@@ -81,6 +81,7 @@ class ProductController extends Controller
 
         return response('success', 204);
     }
+
     /**
      * Display the specified resource.
      *
@@ -100,7 +101,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('budayaku.user.services.product.edit', compact('product'));
     }
 
     /**
@@ -112,7 +113,13 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->all());
+
+//        return $request->all();
+        $product->productimage()->syncWithoutDetaching($request['product_images']);
+
+        Session::flash('success', 'Berhasil');
+        return redirect()->back();
     }
 
     /**
@@ -124,8 +131,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $images = $product->productimage()->get();
-        foreach ($images as $img)
-        {
+        foreach ($images as $img) {
             Storage::disk('public')->delete($img->filename);
         }
 
