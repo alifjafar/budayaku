@@ -67,15 +67,15 @@
 
                         <div class="row align-text-left collapse"  id="collapseExample">
                             <div class="col-sm-7">
-                                <p class="list-unstyled mt-2 "><strong>Make UP</strong></p>
-                                <p class="list-unstyled mt-2 "><strong>Kostum</strong></p>
-                                <p class="list-unstyled mt-2 "><strong>Properti</strong></p>
+                                <p class="mt-2 "><strong>Make UP</strong></p>
+                                <p class="mt-2 "><strong>Kostum</strong></p>
+                                <p class="mt-2 "><strong>Properti</strong></p>
                             </div>
                             <div class="col-sm-5">
 
-                                <p class="list-unstyled mt-2">Rp. 1000.000</p>
-                                <p class="list-unstyled mt-2">Rp. 1000.000</p>
-                                <p class="list-unstyled mt-2">Rp. 1000.000</p>
+                                <p class="mt-2">Rp. 1000.000</p>
+                                <p class="mt-2">Rp. 1000.000</p>
+                                <p class="mt-2">Rp. 1000.000</p>
                             </div>
 
                         </div>
