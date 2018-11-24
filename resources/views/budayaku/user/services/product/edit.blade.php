@@ -39,7 +39,8 @@
                     <h2 class="section-heading pl-3">Edit Jasa</h2>
 
                     <div class="card p-4">
-                        <form action="{{ route('product.update', $product) }}" method="post" enctype="multipart/form-data"
+                        <form action="{{ route('product.update', $product) }}" method="post"
+                              enctype="multipart/form-data"
                               id="thisproduct">
                             @csrf
                             @method('put')
@@ -90,7 +91,41 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+
+                                    <div class="mb-4">
+                                        <label for="price">Biaya Lainnya</label>
+                                        <button onclick="tambah()" class="btn btn-sm pull-right"
+                                                type="button">+ Tambah
+                                        </button>
+                                    </div>
+                                    @if($product->additionalprice)
+                                        @foreach($product->additionalprice as $item)
+                                            <div class="form-group" id="price_layout">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Detail Biaya, Ex: Makeup"
+                                                               value="{{ $item->name }}">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Rp.</span>
+                                                            </div>
+                                                            <input type="number"
+                                                                   class="form-control" value="{{ $item->price }}">
+                                                            <button class="btn remove" type="button">-
+                                                            </button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="price_id[]" value="{{ $item->id }}">
+                                            </div>
+                                        @endforeach
+                                    @endif
+
+                                    <div class="form-group" id="input_video">
                                         <label for="video">Video <a href="#" data-toggle="video"
                                                                     title="Video Dokumentasi Kesenian (Opsional)"><i
                                                     class="fa fa-info-circle"></i></a></label>
@@ -118,6 +153,30 @@
         </div>
 
     </section>
+
+    <div class="d-none">
+        <div class="form-group" id="form-clone">
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="text" class="form-control"
+                           placeholder="Detail Biaya, Ex: Makeup" name="xtra_price[name][]">
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Rp.</span>
+                        </div>
+                        <input type="number" name="xtra_price[price][]"
+                               class="form-control">
+                        <button class="btn remove" type="button">-
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 @endsection
 @push('js')
     <script type="text/javascript">
@@ -165,10 +224,10 @@
         var mockFile = null;
 
         @if($product->productimage)
-        @foreach($product->productimage as $item)
-            mockFile = {id: '{{ $item->id }}', name : '{{ $item->filename }}', size: '{{ $item->size }}' };
-            drop.options.addedfile.call(drop, mockFile);
-            drop.options.thumbnail.call(drop, mockFile, '{{ asset('storage/' . $item->path . $item->filename)  }}');
+            @foreach($product->productimage as $item)
+            mockFile = {id: '{{ $item->id }}', name: '{{ $item->filename }}', size: '{{ $item->size }}'};
+        drop.options.addedfile.call(drop, mockFile);
+        drop.options.thumbnail.call(drop, mockFile, '{{ asset('storage/' . $item->path . $item->filename)  }}');
 
         @endforeach
         @endif
@@ -189,5 +248,15 @@
                 });
         });
 
+    </script>
+
+    <script>
+        function tambah() {
+            $('#input_video').before($('#form-clone').clone());
+        }
+
+        $("body").on("click", ".remove", function () {
+            $(this).closest(".form-group").remove();
+        });
     </script>
 @endpush

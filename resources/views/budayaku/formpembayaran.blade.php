@@ -1,158 +1,189 @@
 @extends('layouts.main')
 
 @section('content')
-<section>
-    <div class="container">
+    <section>
+        <div class="container">
             <div class="row">
-                <div class="container col-lg-6 mt-5">
-                    <form action="">
-                        <!-- Form detai acara -->
-                            <span class="form-header">Detail Acara</span>
-                            <div class="container form-pembayaran">
-                                <label class="mt-3" for="namaeo">Nama Event Owner / Event Organizer</label><br>
-                                <input type="text" class="form-control mb-3" id="inputnamaeo" placeholder="Masukan Nama">
+                <div class="col-md-12">
+                    <form action="#">
+                        <div class="row">
+                            <div class="col-lg-6 mt-5">
+                                <!-- Form detai acara -->
+                                <span class="form-header">Detail Acara</span>
+                                <div class="container form-pembayaran">
+                                    <label class="mt-3" for="namaeo">Nama Event Owner / Event Organizer</label><br>
+                                    <input type="text" class="form-control mb-3" id="inputnamaeo"
+                                           placeholder="Masukan Nama"
+                                           value="{{ $product->user->profile->name }}">
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="email">E-Mail</label>
-                                            <input type="text" class="form-control mb-3" id="inputemail" placeholder="Masukan Nama">
-                                            <label for="tglacara">Tanggal Acara</label><br>
-                                            <div class="form-group row">
-                                                <label for="inputTglMulai" class="col-sm-4 col-form-label">Mulai</label>
-                                                <div class="col-sm-8">
-                                                <input type="date" class="form-control" id="inputMulai" placeholder="dd/mm/yyyy">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="inputTglMulai" class="col-sm-4 col-form-label">Berakhir</label>
-                                                <div class="col-sm-8">
-                                                <input type="date" class="form-control" id="inputBerakhir" placeholder="dd/mm/yyyy">
-                                                </div>
-                                            </div>
+                                            <input type="text" class="form-control mb-3" id="inputemail"
+                                                   placeholder="Masukan Nama" value="{{ $product->user->email }}">
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="email">No Handphone</label>
-                                            <input type="text" class="form-control mb-3" id="inputnohp" placeholder="Masukan No Handphone">
-                                            <label for="tglberangkat">Tanggal Keberangkatan</label>
-                                            <input type="date" class="form-control" id="inputberangkat" placeholder="dd/mm/yyyy-dd/mm/yyyy">
+                                            <label for="telp">No Handphone</label>
+                                            <input type="text" class="form-control mb-3" id="telp"
+                                                   placeholder="Masukan No Handphone"
+                                                   value="{{ $product->user->profile->telp }}">
                                         </div>
                                     </div>
 
-                                <p class="mt-3">Alamat Acara</p>
-                                <label for="prov">Provinsi</label>
-                                <input type="text" class="form-control mb-3" id="inputprov" placeholder="Masukan Provinsi">
-                                <label for="kab">Kabupaten / Kota</label>
-                                <input type="text" class="form-control mb-3" id="inputkab" placeholder="Masukan Kabupaten / Kota">
-                                <label for="kec">Kecamatan</label>
-                                <input type="text" class="form-control mb-3" id="inputkec" placeholder="Masukan Kecamatan">
-                                <label for="alamat">Alamat Lengkap</label>
-                                <textarea class="form-control" rows="5" cols="60" id="inputalamat" placeholder="Masukan Alamat Lengkap"></textarea><br>
-                                <input type="checkbox"> Saya telah membaca dan menyetujui syarat dan ketentuan
-                                <br>
-                                <p><a class="mb-4 font-sk" href="#" data-toggle="modal" data-target="#exampleModalLong">*Syarat dan Ketentuan</a></p>
+                                    <div class="form-group">
+                                        <label for="tgl">Tanggal Booking</label>
+                                        <input type="text" value="{{ $product->booking_date }}" class="form-control"
+                                               readonly>
+                                        <input type="hidden" name="booking_date" value="{{ $product->booking_date }}">
+                                    </div>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Syarat dan Ketentuan Transaksi Budayaku</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Mengerti</button>
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
+                                    <label><b>Alamat Acara * (Wajib Diisi)</b></label>
 
+                                    <div class="form-group">
+                                        <label for="province">Provinsi</label>
+                                        <input type="text" class="form-control mb-3" name="province" id="province"
+                                               placeholder="Masukan Provinsi" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="city">Kabupaten / Kota</label>
+                                        <input type="text" class="form-control mb-3" id="city"
+                                               placeholder="Masukan Kabupaten / Kota" name="city" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="district">Kecamatan</label>
+                                        <input type="text" class="form-control mb-3" id="district" name="district"
+                                               placeholder="Masukan Kecamatan" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="address">Alamat Lengkap</label>
+                                        <textarea class="form-control" rows="5" cols="60" id="address" name="address"
+                                                  placeholder="Masukan Alamat Lengkap" required></textarea><br>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="checkbox" checked onclick="return false"> Saya telah membaca dan
+                                        menyetujui
+                                        syarat dan ketentuan
+                                        <div>
+                                            <a class="mb-4 font-sk" href="#" data-toggle="modal"
+                                               data-target="#exampleModalLong">*Syarat
+                                                dan Ketentuan</a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Syarat dan
+                                                        Ketentuan
+                                                        Transaksi Budayaku</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ...
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-budayaku" data-dismiss="modal">
+                                                        Mengerti
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                    </form>
-                </div>
 
-                <!-- end of form detail acara -->
+                            <!-- end of form detail acara -->
 
-                <!-- form ringkasan pembayaran -->
+                            <!-- form ringkasan pembayaran -->
 
-                <div class="container col-lg-6 mt-5">
-                    <form action="">
-                            <span class="form-header">Ringkasan</span>
+                            <div class="col-lg-6 mt-5">
+                                <span class="form-header">Ringkasan</span>
                                 <div class="container form-pembayaran">
                                     <div class="container">
                                         <div class="form-group row mt-3">
                                             <div class="col-sm-7">
-                                                <p>Harga</p>
+                                                <p>Jasa Kesenian</p>
+                                                <p>Owner Kesenian</p>
+                                                <p>Biaya Jasa</p>
                                                 <br>
-                                                <div class="collapse"  id="collapseExample">
-
-                                                    <p class="mt-2 "><strong>Make UP</strong></p>
-                                                    <p class="mt-2 "><strong>Kostum</strong></p>
-                                                    <p class="mt-2 "><strong>Properti</strong></p>
+                                                <div class="collapse" id="collapseExample">
+                                                    @foreach($product->additionalprice as $item)
+                                                        <p class="mt-2 "><strong>{{ $item->name }}</strong></p>
+                                                    @endforeach
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-5">
-                                                <p>Rp.10000000</p>
-                                                <a class="align-text-rigth dropdown-toggle" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Detail </a>
-                                                <div class="collapse"  id="collapseExample">
-
-                                                    <p class="mt-2">Rp. 1000.000</p>
-                                                    <p class="mt-2">Rp. 1000.000</p>
-                                                    <p class="mt-2">Rp. 1000.000</p>
+                                                <p>{{ $product->name }}</p>
+                                                <p>{{ $product->provider->name }}</p>
+                                                <p>{{ $product->harga }}</p>
+                                                <a class="align-text-rigth dropdown-toggle" data-toggle="collapse"
+                                                   href="#collapseExample" role="button" aria-expanded="false"
+                                                   aria-controls="collapseExample">Biaya Lainnya </a>
+                                                <div class="collapse" id="collapseExample">
+                                                    @foreach($product->additionalprice as $item)
+                                                        <p class="mt-2 ">{{ $item->harga }}</p>
+                                                    @endforeach
                                                 </div>
-                                             </div>
+                                            </div>
 
-                                            </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-7">
-                                                <p>Biaya Transportasi</p>
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <p>Rp.2000.000</p>
-                                            </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-7">
                                                 <p><strong>Total</strong></p>
                                             </div>
                                             <div class="col-sm-5">
-                                                <p><strong>Rp.2000.000</strong></p>
+                                                <p><strong>{{ $product->totalharga }}</strong></p>
                                             </div>
                                         </div>
 
                                         <p>Metode Pembayaran</p>
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="transfer" id="transfer" value="option1">
+                                                <input class="form-check-input" type="radio" name="transfer"
+                                                       id="transfer"
+                                                       value="option1">
                                                 <label class="form-check-label" for="cc">
-                                                    Transfer
+                                                    Transfer Manual
                                                 </label>
                                                 <br>
                                                 <img src="{{ asset('img/tf.png') }}" alt="Transfer">
                                             </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="cc" id="cc" value="option2">
-                                                <label class="form-check-label" for="cc">
-                                                    Credit Card
-                                                </label>
-                                                <br>
-                                                <img src="{{ asset('img/cc.png') }}" alt="Credit Card">
-                                            </div>
+                                            {{--<div class="form-check">--}}
+                                            {{--<input class="form-check-input" type="radio" name="transfer" id="cc" value="option2">--}}
+                                            {{--<label class="form-check-label" for="cc">--}}
+                                            {{--Credit Card--}}
+                                            {{--</label>--}}
+                                            {{--<br>--}}
+                                            {{--<img src="{{ asset('img/cc.png') }}" alt="Credit Card">--}}
+                                            {{--</div>--}}
                                         </div>
                                     </div>
-                                    <div class="text-center ml-5 mt-4 mb-4">
-                                        <a href="{{ route('detail-transaksi', 'BDYXII902391031') }}" class="btn btn-book">Bayar</a>
+                                    <div class="ml-3 mt-4 mb-4">
+                                        <button type="submit"
+                                                class="btn btn-budayaku">Lanjutkan ke Pembayaran
+                                        </button>
                                     </div>
 
                                     <!-- end of ringkasan pembayaran -->
 
                                 </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
-     </div>
-</section>
+            </div>
+        </div>
+    </section>
 @endsection

@@ -29,6 +29,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('categories', 'CategoryController');
     Route::post('upload-image', 'ProductController@uploadImage')->name('upload.image');
     Route::delete('delete-image/{id}', 'ProductController@deleteImage')->name('delete.image');
+
+    Route::resource('booking', 'BookingController');
+    Route::post('pre/booking', 'BookingController@preStore')->name('booking.pre.store');
 });
 
 Route::get('/pembayaran', function () {

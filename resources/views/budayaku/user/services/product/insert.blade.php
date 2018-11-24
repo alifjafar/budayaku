@@ -39,7 +39,8 @@
                     <h2 class="section-heading pl-3">Tambah Jasa</h2>
 
                     <div class="card p-4">
-                        <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data" id="thisproduct">
+                        <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data"
+                              id="thisproduct">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
@@ -70,7 +71,7 @@
                                                   placeholder="Deskripsi Kesenian"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="price">Biaya Total</label>
+                                        <label for="price">Biaya</label>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="input-group mb-3">
@@ -85,18 +86,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="price">Detail Biaya</label>
-                                        <div class="row" id="field">
+                                    <div class="form-group" id="form_price">
+                                        <label for="price">Biaya Lainnya</label>
+                                        <div class="row">
                                             <div class="col-md-6">
-                                                <input id="input1" type="text" class="form-control" placeholder="Detail Biaya, Ex: Makeup">
+                                                <input type="text" class="form-control"
+                                                       placeholder="Detail Biaya, Ex: Makeup" name="xtra_price[name][]">
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Rp.</span>
                                                     </div>
-                                                    <input type="number" name="price" class="form-control">  <button id="b1" class="btn add-more" type="button">+</button>
+                                                    <input type="number" name="xtra_price[price][]"
+                                                           class="form-control">
+                                                    <button onclick="tambah()" class="btn add-more" type="button">+
+                                                    </button>
                                                 </div>
 
                                             </div>
@@ -104,7 +109,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" id="input_video">
                                         <label for="video">Video <a href="#" data-toggle="video"
                                                                     title="Video Dokumentasi Kesenian (Opsional)"><i
                                                     class="fa fa-info-circle"></i></a></label>
@@ -131,6 +136,31 @@
         </div>
 
     </section>
+
+
+    <div class="d-none">
+        <div class="form-group" id="form-clone">
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="text" class="form-control"
+                           placeholder="Detail Biaya, Ex: Makeup" name="xtra_price[name][]">
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Rp.</span>
+                        </div>
+                        <input type="number" name="xtra_price[price][]"
+                               class="form-control">
+                        <button class="btn remove" type="button">-
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 @endsection
 @push('js')
     <script type="text/javascript">
@@ -175,19 +205,28 @@
 
         drop.on("success", function (file, res) {
             file.id = res.id;
-            $("#thisproduct").append($('<input type="hidden" ' + 'name="product_images[]" ' + 'value="' + res.id + '" id="image'+ res.id +'">'))
+            $("#thisproduct").append($('<input type="hidden" ' + 'name="product_images[]" ' + 'value="' + res.id + '" id="image' + res.id + '">'))
         });
 
 
-        drop.on('removedfile', function(file) {
+        drop.on('removedfile', function (file) {
             axios.delete('/delete-image/' + file.id)
-                .then(function(response) {
+                .then(function (response) {
                     console.log(response.status);
                     $('#image' + file.id).remove();
                 })
-                .catch(function(error) {
-            });
+                .catch(function (error) {
+                });
+        });
+
+        function tambah() {
+          $('#input_video').before($('#form-clone').clone());
+        }
+
+        $("body").on("click", ".remove", function () {
+            $(this).closest(".form-group").remove();
         });
 
     </script>
+
 @endpush

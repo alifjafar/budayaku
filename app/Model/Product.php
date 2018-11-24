@@ -32,6 +32,11 @@ class Product extends Model
         return $this->belongsToMany(ImageProduct::class,'product_image','product_id','image_id');
     }
 
+    public function additionalprice()
+    {
+        return $this->belongsToMany(Price::class,'product_prices','product_id','price_id');
+    }
+
     public function booking()
     {
         return $this->hasMany(Booking::class,'product_id','id');
@@ -49,7 +54,18 @@ class Product extends Model
 
     public function getHargaAttribute()
     {
-        return ('Rp' . number_format($this->price,2,',','.'));
+        return ('Rp ' . number_format($this->price,2,',','.'));
+    }
+
+    public function getTotalHargaAttribute()
+    {
+        $total = 0;
+        foreach ($this->additionalprice as $item) {
+            $total += $item->price;
+        }
+
+        $total += $this->price;
+        return ('Rp ' . number_format($total,2,',','.'));
     }
 
     public function getVideoIdAttribute()

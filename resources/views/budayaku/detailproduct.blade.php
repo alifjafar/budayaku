@@ -2,6 +2,9 @@
 @section('title')
     {{ $product->name }} -
 @endsection
+@push('css')
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+@endpush
 @section('content')
     <section>
         <div class="container mt-5">
@@ -58,47 +61,39 @@
                             @endforeach
                         </div>
                         <!-- sampe sini -->
+
                         <hr>
                         <div class="align-text-left show-hide-dropdown">
-                            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                               aria-controls="collapseExample">
                                 <h6><strong>{{ $product->name }}</strong></h6>
-                                <h6><strong>{{ $product->harga }}</strong></h6>
+                                <h6><strong>{{ $product->totalharga }}</strong></h6>
                             </a>
 
-                        <div class="row align-text-left collapse"  id="collapseExample">
-                            <div class="col-sm-7">
-                                <p class="mt-2 "><strong>Make UP</strong></p>
-                                <p class="mt-2 "><strong>Kostum</strong></p>
-                                <p class="mt-2 "><strong>Properti</strong></p>
+                            <div class="row align-text-left collapse" id="collapseExample">
+                                <div class="col-sm-7">
+                                    @foreach($product->additionalprice as $item)
+                                        <p class="mt-2 "><strong>{{ ucwords($item->name) }}</strong></p>
+                                    @endforeach
+                                </div>
+                                <div class="col-sm-5">
+                                    @foreach($product->additionalprice as $item)
+                                        <p class="mt-2">{{ $item->harga }}</p>
+                                    @endforeach
+                                </div>
                             </div>
-                            <div class="col-sm-5">
-
-                                <p class="mt-2">Rp. 1000.000</p>
-                                <p class="mt-2">Rp. 1000.000</p>
-                                <p class="mt-2">Rp. 1000.000</p>
-                            </div>
-
-                        </div>
 
                         </div>
                         <br>
-                        <p>Tanggal Acara :</p>
-                        <form action="{{ route('init.order') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('booking.pre.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            <div class="form-group row">
-                                <label for="inputTglMulai" class="col-sm-2 col-form-label">Mulai</label>
-                                <div class="col-sm-10">
-                                    <input type="date" class="form-input-tanggal" id="inputMulai" name="start_date"
-                                           value="{{ old('start_date', date('Y-m-d')) }}">
+                            <div class="form-group">
+                                <label for="tgl_booking"><strong>Booking Tanggal Acara : </strong></label>
+                                <div class="row col-md-6">
+                                    <input type="text" class="form-control" id="tgl_booking" name="booking_date"
+                                           value="{{ old('end_date', date('m-d-Y')) }}">
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputTglMulai" class="col-sm-2 col-form-label">Berakhir</label>
-                                <div class="col-sm-10">
-                                    <input type="date" class="form-input-tanggal" id="inputBerakhir" name="end_date"
-                                           value="{{ old('end_date', date('Y-m-d')) }}">
-                                </div>
+                                <input type="hidden" name="id" value="{{ $product->id }}">
                             </div>
                             @if(Auth::check())
                                 <button type="submit" class="btn btn-book">Book</button>
@@ -298,5 +293,12 @@
                 $owl_slider = sync1.data('owl.carousel');
                 $owl_slider.to(number, 100, true);
             });
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <script>
+        $('#tgl_booking').daterangepicker();
     </script>
 @endpush

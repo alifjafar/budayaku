@@ -37,9 +37,6 @@
                     <hr>
                     <h2 class="section-heading pl-3">Daftar Product</h2>
                     <div class="card">
-                        <div class="card-header">
-                            Filter
-                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table">
@@ -58,7 +55,7 @@
                                             <td>{{ $item->harga }}</td>
                                             <td>{{ $item->category->name }}</td>
                                             <td>
-                                                <a href="#" class="btn btn-primary btn-sm">Ubah</a>
+                                                <a href="{{ route('product.edit', $item) }}" class="btn btn-primary btn-sm">Ubah</a>
                                                 <button class="btn btn-danger btn-sm"
                                                         onclick="deleteProduct('{{ $item->id }}','{{ $item->name }}')">
                                                     <i
