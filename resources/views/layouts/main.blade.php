@@ -50,6 +50,7 @@
 
     <script src="/js/jquery.min.js"></script>
     <script src="/js/app.js"></script>
+    <script src="/js/custom.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
