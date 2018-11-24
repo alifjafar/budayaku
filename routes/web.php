@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('/{username}/change_password', 'ProfileController@editPassword')->name('edit-password');
         Route::put('/edit/{profile}', 'ProfileController@updateProfile')->name('update.profile');
         Route::put('/change_password/{user}', 'ProfileController@updatePassword')->name('update.password');
+
     });
 
     Route::resource('product', 'ProductController');

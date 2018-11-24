@@ -21,7 +21,7 @@
         @endif
         <div id="nav-sidebar" class="mt-3">
             <nav class="nav flex-column">
-                <a class="nav-link" href="{{ route('edit-profile', Auth::user()->username) }}">Profil Saya</a>
+                <a class="nav-link" href="/dashboard-user">Profil Saya</a>
                 <a class="nav-link" href="{{ route('product.index')}}">Produk Saya</a>
                 <a class="nav-link" href="{{ route('booking-list')}}">Transaksi</a>
                 <a href="#" class="nav-link">Notifikasi</a>
