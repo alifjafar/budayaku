@@ -36,38 +36,44 @@
                     </small>
                     <hr>
                     <h2 class="section-heading pl-3">Daftar Product</h2>
-                    <div class="card p-4">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-striped table-borderless">
-                                <thead>
-                                <tr class="bg-budayaku text-white">
-                                    <th>Nama Produk</th>
-                                    <th>Harga</th>
-                                    <th>Kategori</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @forelse($products as $item)
+                    <div class="card">
+                        <div class="card-header">
+                            Filter
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
                                     <tr>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->harga }}</td>
-                                        <td>{{ $item->category->name }}</td>
-                                        <td>
-                                            <button class="btn btn-primary btn-sm">Edit</button>
-                                            <button class="btn btn-danger btn-sm"
-                                                    onclick="deleteProduct('{{ $item->id }}','{{ $item->name }}')"><i
-                                                    class="fa fa-trash"></i> Delete
-                                            </button>
-                                        </td>
+                                        <th>Nama Produk</th>
+                                        <th>Harga</th>
+                                        <th>Kategori</th>
+                                        <th>Action</th>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="4">Belum ada produk jasa</td>
-                                    </tr>
-                                @endforelse
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    @forelse($products as $item)
+                                        <tr>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->harga }}</td>
+                                            <td>{{ $item->category->name }}</td>
+                                            <td>
+                                                <a href="#" class="btn btn-primary btn-sm">Ubah</a>
+                                                <button class="btn btn-danger btn-sm"
+                                                        onclick="deleteProduct('{{ $item->id }}','{{ $item->name }}')">
+                                                    <i
+                                                        class="fa fa-trash"></i> Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="4">Belum ada produk jasa</td>
+                                        </tr>
+                                    @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
