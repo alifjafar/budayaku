@@ -21,7 +21,7 @@ class CreatePaymentsTable extends Migration
             $table->string('bank_name');
             $table->string('account_number');
             $table->string('account_name');
-            $table->decimal('amount', 6, 4);
+            $table->bigInteger('amount');
             $table->string('image')->nullable();
             $table->date('date');
             $table->timestamps();

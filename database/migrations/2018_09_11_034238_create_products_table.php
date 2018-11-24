@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->longText('description');
-            $table->decimal('price','6','2');
+            $table->bigInteger('price');
             $table->string('video')->nullable();
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('partner_id');

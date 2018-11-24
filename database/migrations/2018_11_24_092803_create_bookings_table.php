@@ -21,7 +21,7 @@ class CreateBookingsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('status', ['paid','unpaid','cancelled']);
-            $table->decimal('total_amount','6','2');
+            $table->bigInteger('total_amount');
             $table->timestamps();
         });
     }

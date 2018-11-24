@@ -56,5 +56,4 @@ Route::get('/payment/invoices/{idtr}', function () {
 
 Route::get('/dashboard-user', function(){
     return view('budayaku.user.profile.dashboard');
-
-});
+})->name('dashboard.client');

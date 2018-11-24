@@ -11,9 +11,12 @@
         </div>
 
         @if(!Auth::user()->isPartner())
-            <div id="new-agent" class="mt-3">
-                <a href="{{ route('register-partner') }}" class="btn btn-sm btn-budayaku btn-block">Daftar Partner</a>
-            </div>
+            @cannot('admin')
+                <div id="new-agent" class="mt-3">
+                    <a href="{{ route('register-partner') }}" class="btn btn-sm btn-budayaku btn-block">Daftar
+                        Partner</a>
+                </div>
+            @endcannot
         @else
             <div id="addService" class="mt-3">
                 <span class="btn btn-sm btn-budayaku btn-block" onclick="swalMe()">Iklankan Jasa</span>
@@ -21,14 +24,16 @@
         @endif
         <div id="nav-sidebar" class="mt-3">
             <nav class="nav flex-column">
-                <a class="nav-link" href="/dashboard-user">Profil Saya</a>
-                <a class="nav-link" href="{{ route('product.index')}}">Produk Saya</a>
-                <a class="nav-link" href="{{ route('booking-list')}}">Transaksi</a>
+                <a class="nav-link" href="{{ route('dashboard.client') }}">Profil Saya</a>
+                @cannot('admin')
+                    <a class="nav-link" href="{{ route('product.index')}}">Produk Saya</a>
+                    <a class="nav-link" href="{{ route('booking-list')}}">Transaksi</a>
+                @endcannot
                 <a href="#" class="nav-link">Notifikasi</a>
             </nav>
         </div>
         @if(Auth::user()->isPartner())
-            <hr />
+            <hr/>
             <div id="agent" class="mt-3">
                 <small class="text-muted">Mitra Budayaku</small>
             </div>
@@ -46,7 +51,7 @@
 @can('admin')
     <div class="card border-light sidebar-dashboard mb-3" id="sidebar-dashboard-admin">
         <div class="card-body">
-            <div id="adminpanel" >
+            <div id="adminpanel">
                 <small class="text-muted">Admin Budayaku</small>
             </div>
             <div id="admin-panel" class="mt-3">
@@ -54,20 +59,20 @@
             </div>
         </div>
     </div>
-    @endcan
+@endcan
 @push('js')
     <script>
         function swalMe() {
             @if(Auth::user()->isPartner())
-                @if(Auth::user()->provider->status == "Pending")
-                swal({
-                    title: "Oops!",
-                    text: "Permintaan untuk bermitra belum di approve",
-                    icon: "error",
-                });
-                @else
-                    window.location.href = '{{ route('product.create') }}';
-                @endif
+            @if(Auth::user()->provider->status == "Pending")
+            swal({
+                title: "Oops!",
+                text: "Permintaan untuk bermitra belum di approve",
+                icon: "error",
+            });
+            @else
+                window.location.href = '{{ route('product.create') }}';
+            @endif
             @endif
         }
     </script>
