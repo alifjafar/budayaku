@@ -34,7 +34,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->provider->status == "Pending") {
+        if (Auth::user()->provider && Auth::user()->provider->status == "Pending") {
             return back()->with(['pending' => 'Permintaan untuk bermitra belum di approve']);
         }
         return view('budayaku.user.services.product.insert');

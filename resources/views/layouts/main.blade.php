@@ -61,6 +61,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script src="/js/swal.min.js"></script>
+<script type='text/javascript'>
+    window.Laravel = '<?php echo json_encode([
+        'csrfToken' => csrf_token(),
+    ]); ?>'
+</script>
 @include('module.modal-login')
 
 @if(Session::has('pending'))

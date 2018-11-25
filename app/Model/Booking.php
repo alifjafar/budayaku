@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
@@ -20,4 +21,10 @@ class Booking extends Model
     {
         return $this->hasOne(BookingDetail::class,'booking_id','id');
     }
+
+    public function getTotalAmountAttribute()
+    {
+        return ('Rp ' . number_format($this->attributes['total_amount'],2,',','.'));
+    }
+
 }

@@ -1,11 +1,14 @@
 @extends('layouts.main')
-
+@push('css')
+    <link href="{{ asset('css/select2-bootstrap.css') }}" rel="stylesheet"/>
+@endpush
 @section('content')
     <section>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <form action="#">
+                    <form action="{{ route('booking.store') }}" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-6 mt-5">
                                 <!-- Form detai acara -->
@@ -41,20 +44,20 @@
 
                                     <div class="form-group">
                                         <label for="province">Provinsi</label>
-                                        <input type="text" class="form-control mb-3" name="province" id="province"
-                                               placeholder="Masukan Provinsi" required>
+                                        {{--<input type="text" class="form-control mb-3" name="province" id="province"--}}
+                                        {{--placeholder="Masukan Provinsi" required>--}}
+
+                                        <select name="province" id="province" class="select2 form-control"></select>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="city">Kabupaten / Kota</label>
-                                        <input type="text" class="form-control mb-3" id="city"
-                                               placeholder="Masukan Kabupaten / Kota" name="city" required>
+                                        <select name="city" id="city" class="select2 form-control"></select>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="district">Kecamatan</label>
-                                        <input type="text" class="form-control mb-3" id="district" name="district"
-                                               placeholder="Masukan Kecamatan" required>
+                                        <select name="district" id="district" class="select2 form-control"></select>
                                     </div>
 
                                     <div class="form-group">
@@ -125,6 +128,13 @@
                                             </div>
 
                                             <div class="col-sm-5">
+                                                <?php $total =0 ?>
+                                                @foreach($product->additionalprice as $item)
+                                                    <?php $total += $item['price'] ?>
+                                                @endforeach
+                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                <input type="hidden" name="total_amount"
+                                                       value="{{ $total + $product->price }}">
                                                 <p>{{ $product->name }}</p>
                                                 <p>{{ $product->provider->name }}</p>
                                                 <p>{{ $product->harga }}</p>
@@ -153,7 +163,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="transfer"
                                                        id="transfer"
-                                                       value="option1">
+                                                       value="manual">
                                                 <label class="form-check-label" for="cc">
                                                     Transfer Manual
                                                 </label>
@@ -187,3 +197,75 @@
         </div>
     </section>
 @endsection
+@push('js')
+    <script src="{{ asset('js/select2.min.js') }}"></script>
+
+
+    <script>
+        $('select').select2();
+    </script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                async: false,
+                type: 'GET',
+                url: '{{ route('resource.province') }}',
+                success: function (data) {
+                    $.each(data.semuaprovinsi, function (index, value) {
+                        $('#province').append(
+                            '<option value="' + value.nama + '" id="' + value.id + '">' + value.nama + '</option>'
+                        );
+                    });
+                },
+                error: function (data) {
+                    console.log('Error:', data)
+                }
+            })
+        });
+
+
+        $('#province').change(function () {
+            let province_id = $(this).children(":selected").attr("id");
+
+            if (province_id) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/resource/cities/' + province_id,
+                    success: function (data) {
+                        $('#city').empty();
+                        $.each(data['daftar_kecamatan'], function (index, value) {
+                            $('#city').append(
+                                '<option value="' + value.nama + '" id="' + value.id + '">' + value.nama + '</option>'
+                            );
+                        });
+                    },
+                    error: function (data) {
+                        console.log('Error:', data)
+                    }
+                })
+            }
+        });
+
+        $('#city').change(function () {
+            let city_id = $(this).children(":selected").attr("id");
+
+            if (city_id) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/resource/districts/' + city_id,
+                    success: function (data) {
+                        $('#district').empty();
+                        $.each(data['daftar_kecamatan'], function (index, value) {
+                            $('#district').append(
+                                '<option value="' + value.nama + '">' + value.nama + '</option>'
+                            );
+                        });
+                    },
+                    error: function (data) {
+                        console.log('Error:', data)
+                    }
+                })
+            }
+        })
+    </script>
+@endpush

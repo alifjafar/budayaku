@@ -1095,7 +1095,7 @@ if (token) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.10';
+  var VERSION = '4.17.11';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -1359,7 +1359,7 @@ if (token) {
   var reHasUnicode = RegExp('[' + rsZWJ + rsAstralRange  + rsComboRange + rsVarRange + ']');
 
   /** Used to detect strings that need a more robust regexp to match words. */
-  var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2,}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
+  var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
 
   /** Used to assign default `context` object properties. */
   var contextProps = [
@@ -2305,20 +2305,6 @@ if (token) {
       }
     }
     return result;
-  }
-
-  /**
-   * Gets the value at `key`, unless `key` is "__proto__".
-   *
-   * @private
-   * @param {Object} object The object to query.
-   * @param {string} key The key of the property to get.
-   * @returns {*} Returns the property value.
-   */
-  function safeGet(object, key) {
-    return key == '__proto__'
-      ? undefined
-      : object[key];
   }
 
   /**
@@ -4778,7 +4764,7 @@ if (token) {
           if (isArguments(objValue)) {
             newValue = toPlainObject(objValue);
           }
-          else if (!isObject(objValue) || (srcIndex && isFunction(objValue))) {
+          else if (!isObject(objValue) || isFunction(objValue)) {
             newValue = initCloneObject(srcValue);
           }
         }
@@ -7699,6 +7685,22 @@ if (token) {
         array[length] = isIndex(index, arrLength) ? oldArray[index] : undefined;
       }
       return array;
+    }
+
+    /**
+     * Gets the value at `key`, unless `key` is "__proto__".
+     *
+     * @private
+     * @param {Object} object The object to query.
+     * @param {string} key The key of the property to get.
+     * @returns {*} Returns the property value.
+     */
+    function safeGet(object, key) {
+      if (key == '__proto__') {
+        return;
+      }
+
+      return object[key];
     }
 
     /**
@@ -18198,7 +18200,7 @@ if (token) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.14.4
+ * @version 1.14.5
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -18295,7 +18297,8 @@ function getStyleComputedProperty(element, property) {
     return [];
   }
   // NOTE: 1 DOM access here
-  var css = getComputedStyle(element, null);
+  var window = element.ownerDocument.defaultView;
+  var css = window.getComputedStyle(element, null);
   return property ? css[property] : css;
 }
 
@@ -18383,7 +18386,7 @@ function getOffsetParent(element) {
   var noOffsetParent = isIE(10) ? document.body : null;
 
   // NOTE: 1 DOM access here
-  var offsetParent = element.offsetParent;
+  var offsetParent = element.offsetParent || null;
   // Skip hidden elements which don't have an offsetParent
   while (offsetParent === noOffsetParent && element.nextElementSibling) {
     offsetParent = (element = element.nextElementSibling).offsetParent;
@@ -18395,9 +18398,9 @@ function getOffsetParent(element) {
     return element ? element.ownerDocument.documentElement : document.documentElement;
   }
 
-  // .offsetParent will return the closest TD or TABLE in case
+  // .offsetParent will return the closest TH, TD or TABLE in case
   // no offsetParent is present, I hate this job...
-  if (['TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
+  if (['TH', 'TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
     return getOffsetParent(offsetParent);
   }
 
@@ -18945,7 +18948,8 @@ function getReferenceOffsets(state, popper, reference) {
  * @returns {Object} object containing width and height properties
  */
 function getOuterSizes(element) {
-  var styles = getComputedStyle(element);
+  var window = element.ownerDocument.defaultView;
+  var styles = window.getComputedStyle(element);
   var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
   var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
   var result = {
@@ -36548,6 +36552,11 @@ module.exports = function normalizeComponent (
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _mounted$data$mounted;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
 //
 //
 //
@@ -36606,40 +36615,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_mounted$data$mounted = {
     mounted: function mounted() {
         console.log('Component mounted.');
     },
     data: function data() {
         return {
             search: '',
-            invoices: [{
-                id: '1',
-                nomor: 'BDYXII902391031',
-                kategori: 'Seni Wayang',
-                namaJasa: 'Wayang Lemah',
-                owner: 'Sanggar Paripurna - Bali'
-            }, {
-                id: '2',
-                nomor: 'BDYXII912391030',
-                kategori: 'Seni Wayang',
-                namaJasa: 'Wayang Lemah',
-                owner: 'Sanggar Paripurna - Bali'
-            }]
+            invoices: []
         };
-    },
-
-    computed: {
-        filteredInvoices: function filteredInvoices() {
-            var _this = this;
-
-            return this.invoices.filter(function (inv) {
-                return inv.nomor.toLowerCase().includes(_this.search.toLowerCase()) || inv.namaJasa.toLowerCase().includes(_this.search.toLowerCase());
-            });
-            //return this.customers;
-        }
     }
-});
+}, _defineProperty(_mounted$data$mounted, 'mounted', function mounted() {
+    var _this = this;
+
+    window.axios.get('/booking').then(function (res) {
+        return _this.invoices = res.data.data;
+    }).catch(function (error) {
+        return console.log(error);
+    });
+}), _defineProperty(_mounted$data$mounted, 'computed', {
+    filteredInvoices: function filteredInvoices() {
+        var _this2 = this;
+
+        return this.invoices.filter(function (inv) {
+            return inv.booking_number.toLowerCase().includes(_this2.search.toLowerCase()) || inv.product.name.toLowerCase().includes(_this2.search.toLowerCase());
+        });
+        //return this.customers;
+    }
+}), _mounted$data$mounted);
 
 /***/ }),
 /* 41 */
@@ -36688,7 +36691,7 @@ var render = function() {
       _vm._l(_vm.filteredInvoices, function(transaksi) {
         return _c("div", { staticClass: "row content" }, [
           _c("span", { staticClass: "form-header" }, [
-            _vm._v("Nomor Tagihan : " + _vm._s(transaksi.nomor))
+            _vm._v("Nomor Tagihan : " + _vm._s(transaksi.booking_number))
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "container form-pembayaran" }, [
@@ -36701,14 +36704,17 @@ var render = function() {
                     _c(
                       "a",
                       { staticClass: "text-muted", attrs: { href: "#" } },
-                      [_vm._v(_vm._s(transaksi.kategori))]
+                      [_vm._v(_vm._s(transaksi.category.name))]
                     )
                   ]),
                   _vm._v(" "),
                   _c("img", {
                     staticClass: "card-img-transaksi",
                     attrs: {
-                      src: "/img/wayang_lemah.jpg",
+                      src:
+                        "/storage/" +
+                        transaksi.image[0].path +
+                        transaksi.image[0].filename,
                       alt: "Card image cap"
                     }
                   })
@@ -36716,20 +36722,42 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-6 mt-4" }, [
                   _c("a", { attrs: { href: "" } }, [
-                    _c("p", [_vm._v(_vm._s(transaksi.namaJasa))]),
+                    _c("p", [_vm._v(_vm._s(transaksi.product.name))]),
                     _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(transaksi.owner))])
+                    _c("p", [_vm._v(_vm._s(transaksi.provider.name))])
                   ]),
                   _vm._v(" "),
-                  _vm._m(2, true)
+                  _c("p", [
+                    _c("strong", [
+                      _c("i", [_vm._v(_vm._s(transaksi.total_amount))])
+                    ])
+                  ])
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(3, true),
+              _c("div", { staticClass: "col-md-2" }, [
+                _c("h6", [_vm._v("Waktu Acara")]),
+                _vm._v(" "),
+                _c("p", [
+                  _c("strong", [
+                    _vm._v(
+                      _vm._s(transaksi.detail.start_date) +
+                        " -  " +
+                        _vm._s(transaksi.detail.end_date)
+                    )
+                  ])
+                ])
+              ]),
               _vm._v(" "),
-              _vm._m(4, true),
+              _c("div", { staticClass: "col-md-2" }, [
+                _c("h6", [_vm._v("Status")]),
+                _vm._v(" "),
+                _c("p", [
+                  _c("strong", [_c("i", [_vm._v(_vm._s(transaksi.status))])])
+                ])
+              ]),
               _vm._v(" "),
-              _vm._m(5, true)
+              _vm._m(2, true)
             ])
           ])
         ])
@@ -36771,32 +36799,6 @@ var staticRenderFns = [
           _c("option", [_vm._v("Dibatalkan")])
         ]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [_c("strong", [_c("i", [_vm._v("Rp. 2000.000")])])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2" }, [
-      _c("h6", [_vm._v("Waktu Acara")]),
-      _vm._v(" "),
-      _c("p", [_c("strong", [_vm._v("27-30 September 2018")])])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2" }, [
-      _c("h6", [_vm._v("Status")]),
-      _vm._v(" "),
-      _c("p", [_c("strong", [_c("i", [_vm._v("Dibayar")])])])
     ])
   },
   function() {

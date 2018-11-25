@@ -33,6 +33,13 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('booking', 'BookingController');
     Route::post('pre/booking', 'BookingController@preStore')->name('booking.pre.store');
+
+    Route::group(['prefix' => 'resource'], function () {
+        Route::get('province', 'LocationController@getProvince')->name('resource.province');
+        Route::get('cities/{id}', 'LocationController@getCity')->name('resource.cities');
+        Route::get('districts/{id}', 'LocationController@getDistrict')->name('resource.district');
+
+    });
 });
 
 Route::get('/pembayaran', function () {
@@ -60,3 +67,4 @@ Route::get('/payment/invoices/{idtr}', function () {
 Route::get('/dashboard-user', function(){
     return view('budayaku.user.profile.dashboard');
 })->name('dashboard.client');
+
