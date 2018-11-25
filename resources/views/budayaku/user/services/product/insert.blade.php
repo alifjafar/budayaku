@@ -3,6 +3,7 @@
 @endpush
 
 @push('css')
+    <link href="{{ asset('css/select2-bootstrap.css') }}" rel="stylesheet"/>
     <style>
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -59,9 +60,8 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="category">Kategori Kesenian</label>
-                                            <select class="selectpicker form-control" data-live-search="true"
-                                                    title="Pilih Kategori"
-                                                    data-style="bg-white border" id="category" name="category_id">
+                                            <select class="select2 form-control" data-live-search="true"
+                                                    title="Pilih Kategori" id="category" name="category_id">
                                             </select>
                                         </div>
                                     </div>
@@ -166,7 +166,9 @@
     </div>
 @endsection
 @push('js')
+    <script src="{{ asset('js/select2.min.js') }}"></script>
     <script type="text/javascript">
+        $('#category').select2();
         $(function () {
             $('[data-toggle="video"]').tooltip();
             $('[data-toggle="image-kesenian"]').tooltip()
@@ -223,7 +225,7 @@
         });
 
         function tambah() {
-          $('#input_video').before($('#form-clone').clone());
+            $('#input_video').before($('#form-clone').clone());
         }
 
         $("body").on("click", ".remove", function () {
