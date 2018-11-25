@@ -72,25 +72,22 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="mb-3" for="price"><strong>Detail Biaya</strong></label>
-                                        <br>
                                         <label for="price">Biaya Sewa</label>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" placeholder="Biaya Sewa">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="input-group">
+                                                <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Rp.</span>
                                                     </div>
-                                                    <input type="number" name="price" class="form-control">
+                                                    <input type="number" name="price" id="price" class="form-control"
+                                                           value="{{ old('price') }}" required>
                                                 </div>
 
                                             </div>
-
+                                            <div class="col-md-6">
+                                                <label class="col-form-label text-muted"> / Harga per hari</label>
+                                            </div>
                                         </div>
-
                                     </div>
                                     <div class="form-group" id="form_price">
                                         <label for="price">Biaya Lainnya</label>
