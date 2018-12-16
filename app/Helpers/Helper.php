@@ -11,7 +11,7 @@ function getCategory()
 
 function getRelatedPost($product_id)
 {
-    $product = Product::where('id', '<>', $product_id)->get();
+    $product = Product::where('id', '<>', $product_id)->inRandomOrder()->get();
 
     return $product;
 }

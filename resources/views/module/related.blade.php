@@ -11,12 +11,12 @@
             @foreach($related as $item)
                 <div class="col-md-6 col-lg-3 mb-4 mt-5 d-flex">
                     <div class="card card-shadow">
-                        <a href="#">
+                        <a href="{{ route('detail-product', $item->slug) }}">
                             <img class="card-img-top" src="{{ asset('storage/' . $item->image) }}"
                                  alt="{{ $item->name }}">
                         </a>
                         <div class="card-body">
-                            <a href="#" class="text-dark">
+                            <a href="{{ route('detail-product', $item->slug) }}" class="text-dark">
                                 <div class="heading-project">
                                     <h3 class="card-title"><strong>{{ $item->name }}</strong></h3>
                                 </div>
