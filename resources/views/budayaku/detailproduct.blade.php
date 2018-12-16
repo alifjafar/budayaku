@@ -108,102 +108,11 @@
 
                 </div>
             </div>
-    </section>
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="container mt-4 text-center">
-                    <hr>
-                    <h2 class="mt-4 section-heading color-budayaku">RELATED</h2>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4 mt-5 d-flex">
-                    <div class="card card-shadow">
-                        <a href="#">
-                            <img class="card-img-top" src="{{ asset('img/wayang_lemah.jpg') }}" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <a href="#" class="text-dark">
-                                <div class="heading-project">
-                                    <h3 class="card-title"><strong>Wayang Lemah</strong></h3>
-                                </div>
-                            </a>
-                            <p class="card__desc text-dark">
-                                Sanggar Paripurna - Bali
-                            </p>
-                            <p class="card__price">
-                                Rp. 2.000.000
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4 mt-5 d-flex">
-                    <div class="card card-shadow">
-                        <a href="#">
-                            <img class="card-img-top" src="{{ asset('img/wayang_lemah.jpg') }}" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <a href="#" class="text-dark">
-                                <div class="heading-project">
-                                    <h3 class="card-title"><strong>Wayang Lemah</strong></h3>
-                                </div>
-                            </a>
-                            <p class="card__desc text-dark">
-                                Sanggar Paripurna - Bali
-                            </p>
-                            <p class="card__price">
-                                Rp. 2.000.000
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4 mt-5 d-flex">
-                    <div class="card card-shadow">
-                        <a href="#">
-                            <img class="card-img-top" src="{{ asset('img/wayang_lemah.jpg') }}" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <a href="#" class="text-dark">
-                                <div class="heading-project">
-                                    <h3 class="card-title"><strong>Wayang Lemah</strong></h3>
-                                </div>
-                            </a>
-                            <p class="card__desc text-dark">
-                                Sanggar Paripurna - Bali
-                            </p>
-                            <p class="card__price">
-                                Rp. 2.000.000
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4 mt-5 d-flex">
-                    <div class="card card-shadow">
-                        <a href="#">
-                            <img class="card-img-top" src="{{ asset('img/wayang_lemah.jpg') }}" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <a href="#" class="text-dark">
-                                <div class="heading-project">
-                                    <h3 class="card-title"><strong>Wayang Lemah</strong></h3>
-                                </div>
-                            </a>
-                            <p class="card__desc text-dark">
-                                Sanggar Paripurna - Bali
-                            </p>
-                            <p class="card__price">
-                                Rp. 2.000.000
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-
     </section>
+    @include('module.related', [
+    'catId' => $product->category_id,
+    'product_id' => $product->id])
 @endsection
 
 @push('js')

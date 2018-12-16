@@ -37,11 +37,10 @@
                         Kategori
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Seni Wayang</a>
-                        <a class="dropdown-item" href="#">Seni Tari</a>
-                        <a class="dropdown-item" href="#">Seni Opera</a>
-                        <a class="dropdown-item" href="#">Seni Drama</a>
-                        <a class="dropdown-item" href="#">Seni Teater</a>
+
+                        @foreach(getCategory() as $item)
+                            <a class="dropdown-item" href="#">{{ $item->name }}</a>
+                        @endforeach
                     </div>
                 </li>
                 <li class="nav-item d-none d-lg-block disabled">
@@ -60,10 +59,12 @@
                         </a>
                         <div class="dropdown-menu dropdown-alerts" aria-labelledby="alertsDropdown">
                             @forelse(Auth::user()->unreadNotifications as $notification)
-                                <a class="dropdown-item" href="{{ $notification['data']['action'] }}">{{ $notification['data']['message'] }}
-                                    <div class="text-muted small">{{ $notification['created_at']->format('d F Y') }}</div>
+                                <a class="dropdown-item"
+                                   href="{{ $notification['data']['action'] }}">{{ $notification['data']['message'] }}
+                                    <div
+                                        class="text-muted small">{{ $notification['created_at']->format('d F Y') }}</div>
                                 </a>
-                                @empty
+                            @empty
                                 <p class="text-center">Belum ada Notifikasi</p>
                             @endforelse
                             <div class="dropdown-divider"></div>
