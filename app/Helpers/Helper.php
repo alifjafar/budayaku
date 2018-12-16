@@ -13,5 +13,5 @@ function getRelatedPost($product_id)
 {
     $product = Product::where('id', '<>', $product_id)->get();
 
-    return $product->random();
+    return $product;
 }
