@@ -9,11 +9,9 @@ function getCategory()
     return $cat;
 }
 
-function getRelatedPost($id, $product_id)
+function getRelatedPost($product_id)
 {
-    $product = Product::whereHas('category', function ($q) use ($id) {
-        return $q->where('id', $id);
-    })->where('id', '<>', $product_id)->get();
+    $product = Product::where('id', '<>', $product_id)->get();
 
-    return $product;
+    return $product->random();
 }

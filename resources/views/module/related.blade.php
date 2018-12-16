@@ -3,10 +3,10 @@
         <div class="row">
             <div class="container mt-4 text-center">
                 <hr>
-                <h2 class="mt-4 section-heading color-budayaku">RELATED PRODUCT</h2>
+                <h2 class="mt-4 section-heading color-budayaku">PRODUK LAINNYA</h2>
             </div>
             @php
-                $related = getRelatedPost($catId, $product_id);
+                $related = getRelatedPost($product_id);
             @endphp
             @foreach($related as $item)
                 <div class="col-md-6 col-lg-3 mb-4 mt-5 d-flex">
@@ -37,7 +37,7 @@
                 <div class="col-md-12 text-center">
                     <h6 class="mt-4">
                         <span class="fa fa-warning"></span>
-                        Tidak ada produk terkait</h6>
+                        Tidak ada produk lainnya</h6>
                 </div>
             @endif
         </div>
