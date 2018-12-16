@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         if(!Auth::user()->isPartner())
         {
-            return redirect()->route('partners.index');
+            return redirect()->route('register-partner');
         }
     }
 
