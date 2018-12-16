@@ -3,30 +3,30 @@
 @endpush
 
 @section('content')
-<section class="mt-5" id="edit-profile">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-    @include('budayaku.user.sidebar-dashboard')
-            </div>
-            <div class="col-md-9">
-                <small>
-                    <ol class="breadcrumb" style="background:transparent">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Transaksi</li>
-                    </ol>
-                </small>
-                <hr>
-                <h2 class="section-heading">Daftar Transaksi</h2>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="tablist">
-                            <a href="#" class="active">Pemesanan</a>
-                            <a href="#">Pesanan Layanan</a>
+    <section class="mt-5" id="edit-profile">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    @include('budayaku.user.sidebar-dashboard')
+                </div>
+                <div class="col-md-9">
+                    <small>
+                        <ol class="breadcrumb" style="background:transparent">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Transaksi</li>
+                        </ol>
+                    </small>
+                    <hr>
+                    <h2 class="section-heading">Daftar Transaksi</h2>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tablist">
+                                <a href="#" class="active">Pemesanan</a>
+                                <a href="#">Pesanan Layanan</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <daftar-invoice></daftar-invoice>
+                    <daftar-invoice></daftar-invoice>
 
                     {{-- <div class="row content">
                         <span class="form-header">Nomor Tagihan : BDYXII902391030</span>
@@ -92,37 +92,42 @@
                         </div>
                     </div> --}}
                     {{-- End Loop Content --}}
+                </div>
             </div>
         </div>
-    </div>
 
-</section>
+    </section>
 @endsection
 
 @push('js')
 
+    @if(session()->has('success'))
+        <script>
+            swal('Berhasil !', '{{ session()->get('success') }}', 'success');
+        </script>
+    @endif
 
-{{--<script>--}}
-{{--new Vue({--}}
+    {{--<script>--}}
+    {{--new Vue({--}}
     {{--el: '#invoices',--}}
-            {{--data: function(){--}}
-                {{--return {--}}
-                {{--search: '',--}}
-                {{--invoices: [--}}
-                {{--{ id: '1', nomor: 'BDYXII902391031', kategori: 'Seni Wayang', namaJasa: 'Wayang Lemah', owner: 'Sanggar Paripurna - Bali'},--}}
-                {{--{ id: '2', nomor: 'BDYXII912391030', kategori: 'Seni Wayang', namaJasa: 'Wayang Lemah', owner: 'Sanggar Paripurna - Bali'}--}}
-                {{--]};--}}
-        {{--},--}}
-        {{--computed:--}}
-        {{--{--}}
-            {{--filteredInvoices()--}}
-            {{--{--}}
-            {{--return this.invoices.filter(inv =>{--}}
-                {{--return (inv.nomor.toLowerCase().includes(this.search.toLowerCase()) || inv.namaJasa.toLowerCase().includes(this.search.toLowerCase()))--}}
-            {{--})--}}
-            {{--//return this.customers;--}}
-            {{--}--}}
-        {{--}--}}
-{{--});--}}
-{{--</script>--}}
+    {{--data: function(){--}}
+    {{--return {--}}
+    {{--search: '',--}}
+    {{--invoices: [--}}
+    {{--{ id: '1', nomor: 'BDYXII902391031', kategori: 'Seni Wayang', namaJasa: 'Wayang Lemah', owner: 'Sanggar Paripurna - Bali'},--}}
+    {{--{ id: '2', nomor: 'BDYXII912391030', kategori: 'Seni Wayang', namaJasa: 'Wayang Lemah', owner: 'Sanggar Paripurna - Bali'}--}}
+    {{--]};--}}
+    {{--},--}}
+    {{--computed:--}}
+    {{--{--}}
+    {{--filteredInvoices()--}}
+    {{--{--}}
+    {{--return this.invoices.filter(inv =>{--}}
+    {{--return (inv.nomor.toLowerCase().includes(this.search.toLowerCase()) || inv.namaJasa.toLowerCase().includes(this.search.toLowerCase()))--}}
+    {{--})--}}
+    {{--//return this.customers;--}}
+    {{--}--}}
+    {{--}--}}
+    {{--});--}}
+    {{--</script>--}}
 @endpush

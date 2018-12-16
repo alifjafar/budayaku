@@ -62,7 +62,7 @@ class BookingController extends Controller
 
         Notification::send($user, new BookingNotification(Auth::user()->profile->name));
 
-        return redirect()->route('booking-list');
+        return redirect()->route('booking-list')->with(['success' => 'Kamu Telah berhasil Membooking Jasa']);
 
     }
 }
