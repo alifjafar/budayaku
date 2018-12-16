@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     });
 });
 
+Route::get('explore', 'HomeController@explore')->name('explore');
+Route::get('search/{s?}', 'HomeController@search')->name('search');
 Route::get('/pembayaran', function () {
     return view('budayaku.formpembayaran');
 });
@@ -51,10 +53,6 @@ Route::get('/daftartransaksi', function () {
 Route::get('/rincian', function () {
     return view('budayaku.rincian');
 });
-Route::get('/explore', function () {
-    return view('budayaku.daftarkesenian');
-});
-
 
 Route::get('/payment/invoices', function () {
     return view('budayaku.user.services.riwayat-pemesanan');

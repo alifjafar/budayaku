@@ -52,7 +52,7 @@
                                          alt="{{ $item->name }}">
                                 </a>
                                 <div class="card-body">
-                                    <a href="{{ route('detail-product', 'wayang-lemah') }}" class="text-dark">
+                                    <a href="{{ route('detail-product', $item->slug) }}" class="text-dark">
                                         <div class="heading-project">
                                             <h3 class="card-title"><strong>{{ $item->name }}</strong></h3>
                                         </div>

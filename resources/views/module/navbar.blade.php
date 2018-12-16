@@ -23,10 +23,10 @@
         @endif
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="form-group has-search my-2 my-lg-0 ml-auto">
+            <form class="form-group has-search my-2 my-lg-0 ml-auto" action="{{ route('search') }}" method="get">
                 <span class="fa fa-search form-control-feedback"></span>
                 <input class="form-control w-250 mr-sm-2" type="search" placeholder="Cari Kesenian..."
-                       aria-label="Search">
+                       aria-label="Search" name="s">
             </form>
 
             <ul class="navbar-nav ml-auto">
@@ -39,7 +39,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                         @foreach(getCategory() as $item)
-                            <a class="dropdown-item" href="#">{{ $item->name }}</a>
+                            <a class="dropdown-item" href="{{ route('explore', ['cat' => $item->id]) }}">{{ $item->name }}</a>
                         @endforeach
                     </div>
                 </li>
@@ -47,7 +47,7 @@
                     <span class="nav-link disabled">⋮</span>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#explore">Explore</a>
+                    <a class="nav-link" href="{{ route('explore') }}">Explore</a>
                 </li>
                 @if ($isLogin)
                     <li class="nav-item dropdown">
@@ -58,12 +58,13 @@
                             <span class="badge badge-warning">{{ count(Auth::user()->unreadNotifications) }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-alerts" aria-labelledby="alertsDropdown">
-                            @forelse(Auth::user()->unreadNotifications as $notification)
+                            @forelse(Auth::user()->notifications()->take(5) as $notification)
                                 <a class="dropdown-item"
                                    href="{{ $notification['data']['action'] }}">{{ $notification['data']['message'] }}
                                     <div
                                         class="text-muted small">{{ $notification['created_at']->format('d F Y') }}</div>
                                 </a>
+                                {{ $notification->markAsRead() }}
                             @empty
                                 <p class="text-center">Belum ada Notifikasi</p>
                             @endforelse
