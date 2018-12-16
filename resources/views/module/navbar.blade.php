@@ -58,7 +58,7 @@
                             <span class="badge badge-warning">{{ count(Auth::user()->unreadNotifications) }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-alerts" aria-labelledby="alertsDropdown">
-                            @forelse(Auth::user()->notifications()->take(5) as $notification)
+                            @forelse(Auth::user()->notifications->take(5) as $notification)
                                 <a class="dropdown-item"
                                    href="{{ $notification['data']['action'] }}">{{ $notification['data']['message'] }}
                                     <div
