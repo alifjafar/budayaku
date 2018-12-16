@@ -29,11 +29,12 @@ class PartnerRegisterController extends Controller
         $user = User::whereIn('role_id', [1,2])->get();
 
         $validated = $request->validated();
-        $fileName = 'idcard/' . $validated['name'] . '-' . uniqid() . '.' . str_slug($validated['id_card']->getClientOriginalExtension());
+        $fileName =  $validated['name'] . '-' . uniqid() . '.' . str_slug($validated['id_card']->getClientOriginalExtension());
+        $path = 'idcard';
         $validated['status'] = "Pending";
 
-        Storage::disk('public')->putFileAs('idcard', $validated['id_card'], $fileName, 'public');
-        $validated['id_card'] = $fileName;
+        Storage::disk('public')->putFileAs($path, $validated['id_card'], $fileName, 'public');
+        $validated['id_card'] = $path . '/' . $fileName;
 
         Partner::create($validated);
 
