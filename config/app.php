@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://budayaku.online'),
+    'url' => env('APP_URL', 'https://budayaku.online'),
 
     /*
     |--------------------------------------------------------------------------
