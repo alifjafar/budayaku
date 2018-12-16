@@ -43,13 +43,12 @@
                                         </td>
                                         <td>
                                             <button data-toggle="modal"
-                                                    data-target="#manageRequest" data-id="{{ $item->id }}"
-                                                    data-name="{{ $item->name }}" data-status="{{ $item->status }}"
+                                                    data-target="#manageRequest" data-data="{{ $item }}"
                                                     class="btn btn-primary btn-xs"><i
                                                     class="icon icon-pencil"></i>Manage
                                             </button>
                                             <button
-                                                onclick="deleteAkun('{{ $item->id }}', '{{ $item->name }}')"
+                                                onclick="deletePartner('{{ $item->id }}', '{{ $item->name }}')"
                                                 class="btn btn-danger btn-xs"><i
                                                     class="icon icon-trash"></i>Hapus
                                             </button>
@@ -85,12 +84,39 @@
                             <input type="text" id="name" class="form-control" readonly>
                         </div>
                         <div class="form-group">
+                            <label for="description">Deskripsi</label>
+                            <textarea id="description" class="form-control" rows="4" readonly></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="card">Kartu Identitas</label>
+                            <div class="mb-1">
+                                <button class="btn btn-danger btn-xs" type="button" data-toggle="collapse"
+                                        data-target="#collapseCard" aria-expanded="false" aria-controls="collapseCard">
+                                    Buka Gambar
+                                </button>
+                            </div>
+
+                            <div class="collapse" id="collapseCard">
+                                <div class="card card-body">
+                                    <img src="" alt="Kartu Identitas" class="img-fluid" id="card">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
                             <label for="status">Status</label>
                             <select name="status" id="status" class="custom-select">
                                 <option value="Pending">Pending</option>
                                 <option value="Active">Active</option>
                             </select>
                         </div>
+
+                        <div class="form-group">
+                            <label for="address">Alamat</label>
+                            <textarea id="address" class="form-control" rows="4" readonly></textarea>
+                        </div>
+
                         <div class="modal-footer bg-white">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -134,13 +160,17 @@
         $('#manageRequest').on('show.bs.modal', function (e) {
             let
                 button = $(e.relatedTarget),
-                name = button.data('name'),
-                id = button.data('id'),
-                status = button.data('status');
+                data = button.data('data'),
+                name = data.name,
+                id = data.id,
+                status = data.status;
 
             $('#name').val(name);
             $('#status').find('option[value="' + status + '"]').attr('selected', true);
-            $('#changeStatus').attr('action', "{{ route('partners.index') }}/"+ id);
+            $('#changeStatus').attr('action', "{{ route('partners.index') }}/" + id);
+            $('#description').val(data.description);
+            $('#card').attr('src', '{{ asset('storage') }}' + '/' + data.id_card);
+            $('#address').val(data.address);
 
         })
     </script>
@@ -152,17 +182,17 @@
             }
         });
 
-        function deleteAkun(accountId, accountName) {
+        function deletePartner(partnerId, partnerName) {
             swal({
                 title: "Apa anda yakin?",
-                text: "Anda Menghapus User " + accountName,
+                text: "Anda Menghapus Partner " + partnerName,
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
             }).then((willDelete => {
                 if (willDelete) {
-                    let theUrl = "{{ route('users.destroy', ':accountId') }}";
-                    theUrl = theUrl.replace(":accountId", accountId);
+                    let theUrl = "{{ route('partners.destroy', ':partnerId') }}";
+                    theUrl = theUrl.replace(":partnerId", partnerId);
                     $.ajax({
                         type: 'POST',
                         url: theUrl,

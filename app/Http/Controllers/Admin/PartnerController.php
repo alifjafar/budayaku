@@ -6,6 +6,7 @@ use App\Model\Partner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class PartnerController extends Controller
 {
@@ -22,5 +23,14 @@ class PartnerController extends Controller
         Session::flash('success', 'Berhasil Mengubah Status Partner');
 
         return redirect()->route('partners.index');
+    }
+
+    public function destroy(Partner $partner)
+    {
+        Storage::disk('public')->delete($partner->id_card);
+
+        $partner->delete();
+
+        return route('partners.index');
     }
 }

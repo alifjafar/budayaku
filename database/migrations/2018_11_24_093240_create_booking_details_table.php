@@ -25,7 +25,7 @@ class CreateBookingDetailsTable extends Migration
             $table->longText('notes')->nullable();
             $table->timestamps();
 
-            $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
+            $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

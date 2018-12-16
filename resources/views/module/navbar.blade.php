@@ -56,15 +56,16 @@
                            aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-bell-o"></i>
                             <span class="ml-1">Notifikasi</span>
-                            <span class="badge badge-warning">2</span>
+                            <span class="badge badge-warning">{{ count(Auth::user()->unreadNotifications) }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-alerts" aria-labelledby="alertsDropdown">
-                            <a class="dropdown-item" href="#">Pembayaran telah diterima
-                                <div class="text-muted small">8 Agustus 2018 19:32 WIB</div>
-                            </a>
-                            <a class="dropdown-item" href="#">Ada pesanan untukmu
-                                <div class="text-muted small">8 Agustus 2018 15:17 WIB</div>
-                            </a>
+                            @forelse(Auth::user()->unreadNotifications as $notification)
+                                <a class="dropdown-item" href="{{ $notification['data']['action'] }}">{{ $notification['data']['message'] }}
+                                    <div class="text-muted small">{{ $notification['created_at']->format('d F Y') }}</div>
+                                </a>
+                                @empty
+                                <p class="text-center">Belum ada Notifikasi</p>
+                            @endforelse
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-center" href="#"><strong>Lihat Semua</strong> <i
                                     class="fa fa-angle-right"></i></a>
@@ -104,6 +105,9 @@
                             </li>
                             <li class="dropdown-divider"></li>
                             <li class="full-rum">
+                                @can('admin')
+                                    <a href="{{ route('users.index') }}">Konsole Admin</a>
+                                @endcan
                                 <a href="{{ route('profile', Auth::user()->username) }}">Halaman Profil</a>
                                 <a href="{{ route('booking-list') }}">Riwayat Pesanan</a>
                                 <a href="{{ route('edit-profile', Auth::user()->username) }}">Pengaturan</a>
@@ -143,6 +147,9 @@
                                 </li>
                                 <li class="dropdown-divider"></li>
                                 <li class="full-rum">
+                                    @can('admin')
+                                        <a href="{{ route('users.index') }}">Konsole Admin</a>
+                                    @endcan
                                     <a href="{{ route('profile', Auth::user()->username) }}">Halaman Profil</a>
                                     <a href="{{ route('booking-list') }}">Riwayat Pesanan</a>
                                     <a href="{{ route('edit-profile', Auth::user()->username) }}">Pengaturan</a>

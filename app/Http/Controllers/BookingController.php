@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Resources\BookingResource;
 use App\Model\Booking;
 use App\Model\BookingDetail;
+use App\Model\Partner;
 use App\Model\Product;
+use App\Notifications\BookingNotification;
+use App\Notifications\PartnerRegister;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class BookingController extends Controller
 {
@@ -32,9 +36,13 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $product = $request->all();
+
+        $user = Product::where('id', $product['product_id'])->first()->provider->user;
+
+
         $product['booking_number'] = autonumber('bookings', 'id', 'BDY-');
         $product['user_id'] = Auth::user()->id;
-//        $product['status'] = 'unpaid';
+        $product['status'] = 'unpaid';
 
         $date = array_map('trim', explode('-', $request['booking_date']));
         $product['start_date'] = Carbon::parse($date[0])->format('Y-m-d');
@@ -51,6 +59,8 @@ class BookingController extends Controller
             'city' => $product['city'],
             'address' => $product['address']
         ]);
+
+        Notification::send($user, new BookingNotification(Auth::user()->profile->name));
 
         return redirect(route('homepage'));
 

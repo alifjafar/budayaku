@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PartnerRegister as register;
 use App\Model\Partner;
+use App\Model\User;
+use App\Notifications\PartnerRegister;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
@@ -23,8 +26,10 @@ class PartnerRegisterController extends Controller
 
     public function partnerRegister(register $request)
     {
+        $user = User::whereIn('role_id', [1,2])->get();
+
         $validated = $request->validated();
-        $fileName = $validated['name'] . '-' . uniqid() . '.' . str_slug($validated['id_card']->getClientOriginalExtension());
+        $fileName = 'idcard/' . $validated['name'] . '-' . uniqid() . '.' . str_slug($validated['id_card']->getClientOriginalExtension());
         $validated['status'] = "Pending";
 
         Storage::disk('public')->putFileAs('idcard', $validated['id_card'], $fileName, 'public');
@@ -32,8 +37,10 @@ class PartnerRegisterController extends Controller
 
         Partner::create($validated);
 
+        Notification::send($user, new PartnerRegister(Auth::user()->profile->name));
+
         Session::flash('success', 'Pendaftaran Berhasil ! , Tim kami akan segera memverifikasi permintaanmu');
-        return redirect()->back();
+        return redirect()->route('dashboard.client')->with(['success' => 'Berhasil Mendaftar Menjadi Partner']);
 
     }
 }

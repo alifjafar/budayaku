@@ -105,7 +105,7 @@
                                                         <h6>Profil User</h6>
                                                     </div>
                                                     <div class="card-body">
-                                                        <div class="row" id="graphx" >
+                                                        <div class="row" id="graphx">
                                                             <div class="col-md-4">
                                                                 <p>Username</p>
                                                                 <p>Nama Lengkap</p>
@@ -119,7 +119,7 @@
                                                                 <p>{{ Auth::user()->username }}</p>
                                                                 <p>{{Auth::user()->profile->name }}</p>
                                                                 @if(Auth::user()->profile->gender==1)
-                                                                <p>Laki - laki</p>
+                                                                    <p>Laki - laki</p>
                                                                 @else
                                                                     <p>Perempuan</p>
                                                                 @endif
@@ -148,3 +148,11 @@
     </section>
 
 @endsection
+
+@push('js')
+    @if(session()->has('success'))
+        <script>
+            swal('Berhasil !', '{{ session()->get('success') }}', 'success');
+        </script>
+    @endif
+@endpush
