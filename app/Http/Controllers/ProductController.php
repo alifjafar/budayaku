@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+
+    public function __construct()
+    {
+        if(!Auth::user()->isPartner())
+        {
+            return redirect()->route('partners.index');
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
