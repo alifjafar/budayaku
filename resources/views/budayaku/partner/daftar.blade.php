@@ -108,7 +108,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <a href="#" class="btn btn-outline-danger btn-sm"><i
+                                            <a href="{{ route('dashboard.client') }}" class="btn btn-outline-danger btn-sm"><i
                                                     class="fa fa-close"></i> Cancel</a>
                                             <button type="submit" class="btn btn-budayaku btn-sm float-right"><i
                                                     class="fa fa-save"></i> Daftar
@@ -138,4 +138,10 @@
             $(this).next('.custom-file-label').html(fileName);
         })
     </script>
+
+    @if(session()->has('warning'))
+        <script>
+            swal('Oops !', '{{ session()->get('warning') }}', 'info');
+        </script>
+        @endif
 @endpush

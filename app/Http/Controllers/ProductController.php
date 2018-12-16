@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Partner;
 use App\Model\ImageProduct;
 use App\Model\Price;
 use App\Model\Product;
@@ -17,10 +18,7 @@ class ProductController extends Controller
 
     public function __construct()
     {
-        if(!Auth::user()->isPartner())
-        {
-            return redirect()->route('register-partner');
-        }
+        $this->middleware(Partner::class);
     }
 
     /**

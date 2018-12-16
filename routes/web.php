@@ -64,7 +64,7 @@ Route::get('/payment/invoices/{idtr}', function () {
     return view('budayaku.user.services.detail-transaksi');
 })->name('detail-transaksi');
 
-Route::get('/dashboard-user', function(){
+Route::get('/dashboard', function(){
     return view('budayaku.user.profile.dashboard');
 })->name('dashboard.client');
 
