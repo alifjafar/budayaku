@@ -30,7 +30,7 @@ class BookingNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'mail'];
     }
 
     /**
@@ -42,8 +42,8 @@ class BookingNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->line($this->user . ' Membooking Jasamu')
+                    ->action('Action', route('booking.index'))
                     ->line('Thank you for using our application!');
     }
 
